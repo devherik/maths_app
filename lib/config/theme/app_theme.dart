@@ -20,4 +20,18 @@ abstract class AppTheme {
       fontFamily: GoogleFonts.raleway().fontFamily,
     );
   }
+
+  static ThemeData get dark {
+    return ThemeData(
+      appBarTheme: const AppBarTheme(
+        elevation: 0.0,
+        color: Colors.transparent,
+      ),
+      scaffoldBackgroundColor: Colors.black,
+      primarySwatch: Colors.lightGreen,
+      colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightGreen),
+      useMaterial3: true,
+      fontFamily: GoogleFonts.raleway().fontFamily,
+    );
+  }
 }
