@@ -59,14 +59,26 @@ class _LoginPageState extends State<LoginPage> {
                       decoration: const InputDecoration(
                         labelText: 'Usuário/E-mail',
                       ),
-                      onChanged: (value) => (user = value),
+                      onChanged: (value) {
+                        if (value != '') {
+                          setState(() {
+                            user = value;
+                          });
+                        }
+                      },
                     ),
                     TextFormField(
                       obscureText: true,
                       decoration: const InputDecoration(
                         labelText: 'Senha',
                       ),
-                      onChanged: (value) => (password = value),
+                      onChanged: (value) {
+                        if (value != '') {
+                          setState(() {
+                            password = value;
+                          });
+                        }
+                      },
                     ),
                     const SizedBox(height: 50),
                     OutlinedButton(
@@ -87,7 +99,10 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       onPressed: () {
-                        bloc.AuthFields().formInValidation(user, password);
+                        if (bloc.AuthFields()
+                            .formInValidation(user, password)) {
+                          context.go('/home');
+                        }
                       },
                       child: const Text(
                         'ENTRAR',

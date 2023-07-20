@@ -15,11 +15,14 @@ class AuthFields {
     }
   }
 
-  void formInValidation(String? user, String? password) {
-    if (user.toString().isNotEmpty && password.toString().isNotEmpty) {
+  bool formInValidation(String? user, String? password) {
+    if (user != null && password != null) {
       // busca no bd o usuario e valida a senha, fazendo então a rota pra próxima tela
       AuthLog().logIn();
+      print('$user $password');
+      return true;
     }
+    return false;
   }
 
   void formUpValidation(String? user, String? password, String? passConf) {}
