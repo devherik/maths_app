@@ -6,11 +6,11 @@ class Database extends ValueNotifier<List<UserEntity>> {
 
   addUser(user) => value.add(user);
   UserEntity getUser(name) {
-    return value.firstWhere((u) => u.nickname == name || u.email == name);
+    return value.firstWhere((u) => u.name == name || u.email == name);
   }
 
   UserEntity newUser(nick, email, password) {
-    var u = UserEntity(email: email, password: password, nickname: nick);
+    var u = UserEntity(email: email, password: password, name: nick);
     value.add(u);
     return u;
   }

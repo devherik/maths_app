@@ -3,15 +3,15 @@ import 'package:maths_app/features/auth/login/domain/entities/cubicmeter_entity.
 import 'package:maths_app/features/auth/login/domain/entities/squaremeter_entity.dart';
 
 class UserEntity {
-  final String? nickname;
+  final String? name;
   final String? email;
   final String? password;
   ValueNotifier<List<CubicMeter>> cubics$ = ValueNotifier([]);
   ValueNotifier<List<SquareMeter>> squares$ = ValueNotifier([]);
 
-  UserEntity({required this.email, required this.password, this.nickname});
+  UserEntity({required this.email, required this.password, this.name});
 
-  dynamic getNick() => nickname;
+  dynamic getName() => name;
   dynamic getEmail() => email;
 
   List getSquare() => squares$.value;

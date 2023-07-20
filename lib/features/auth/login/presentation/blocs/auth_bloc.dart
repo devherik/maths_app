@@ -20,8 +20,22 @@ class AuthFields {
     return false;
   }
 
-  void formUpValidation(
-      String? user, String? password, String? confirmPassword) {}
+  bool formUpValidation(
+      String? user, String? email, String? password, String? confirmPassword) {
+    if (user != null && password != null && confirmPassword != null) {
+      if (password == confirmPassword) {
+        try {
+          userActual$.value =
+              UserEntity(email: email, password: password, name: user);
+          AuthLog().logIn();
+          return true;
+        } catch (error) {
+          return false;
+        }
+      }
+    }
+    return false;
+  }
 }
 
 class AuthLog extends ValueNotifier<bool> {

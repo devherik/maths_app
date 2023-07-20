@@ -11,7 +11,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  var user;
+  var name;
   var password;
   @override
   void initState() {
@@ -57,12 +57,12 @@ class _LoginPageState extends State<LoginPage> {
                   children: <Widget>[
                     TextFormField(
                       decoration: const InputDecoration(
-                        labelText: 'Usuário/E-mail',
+                        labelText: 'Nome',
                       ),
                       onChanged: (value) {
                         if (value != '') {
                           setState(() {
-                            user = value;
+                            name = value;
                           });
                         }
                       },
@@ -82,25 +82,19 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     const SizedBox(height: 50),
                     OutlinedButton(
-                      style: ButtonStyle(
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                const RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5)),
-                                    side: BorderSide(color: Colors.blueGrey))),
-                        elevation: const MaterialStatePropertyAll(5),
-                        padding: const MaterialStatePropertyAll<EdgeInsets>(
+                      style: const ButtonStyle(
+                        elevation: MaterialStatePropertyAll(5),
+                        padding: MaterialStatePropertyAll<EdgeInsets>(
                           EdgeInsets.only(
-                              top: 20, bottom: 20, left: 60, right: 60),
+                              top: 20, bottom: 20, left: 100, right: 100),
                         ),
-                        backgroundColor: const MaterialStatePropertyAll<Color>(
+                        backgroundColor: MaterialStatePropertyAll<Color>(
                           Color.fromARGB(255, 206, 228, 180),
                         ),
                       ),
                       onPressed: () {
                         if (bloc.AuthFields()
-                            .formInValidation(user, password)) {
+                            .formInValidation(name, password)) {
                           context.go('/home');
                         }
                       },
