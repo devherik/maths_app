@@ -10,8 +10,7 @@ class Database extends ValueNotifier<List<UserEntity>> {
   }
 
   UserEntity newUser(nick, email, password) {
-    var u = UserEntity(value.length + 1,
-        email: email, password: password, nickname: nick);
+    var u = UserEntity(email: email, password: password, nickname: nick);
     value.add(u);
     return u;
   }
