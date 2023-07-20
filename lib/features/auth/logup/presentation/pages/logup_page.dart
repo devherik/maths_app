@@ -40,94 +40,91 @@ class _LogupPageState extends State<LogupPage> {
                 ),
               ),
             ),
-            Expanded(
-              flex: 5,
-              child: Container(
-                padding: const EdgeInsets.all(40),
-                margin: const EdgeInsets.all(10),
-                decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    color: Colors.white),
-                child: Column(
-                  children: <Widget>[
-                    TextFormField(
-                      decoration: const InputDecoration(
-                        labelText: 'E-mail',
-                      ),
-                      onChanged: (value) {
-                        if (value != '') {
-                          setState(() {
-                            email = value;
-                          });
-                        }
-                      },
+            Container(
+              padding: const EdgeInsets.all(40),
+              margin: const EdgeInsets.all(10),
+              decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  color: Colors.white),
+              child: Column(
+                children: <Widget>[
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      labelText: 'E-mail',
                     ),
-                    TextFormField(
-                      decoration: const InputDecoration(
-                        labelText: 'Nome',
-                      ),
-                      onChanged: (value) {
-                        if (value != '') {
-                          setState(() {
-                            name = value;
-                          });
-                        }
-                      },
+                    onChanged: (value) {
+                      if (value != '') {
+                        setState(() {
+                          email = value;
+                        });
+                      }
+                    },
+                  ),
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      labelText: 'Nome',
                     ),
-                    TextFormField(
-                      obscureText: true,
-                      decoration: const InputDecoration(
-                        labelText: 'Senha',
-                      ),
-                      onChanged: (value) {
-                        if (value != '') {
-                          setState(() {
-                            password = value;
-                          });
-                        }
-                      },
+                    onChanged: (value) {
+                      if (value != '') {
+                        setState(() {
+                          name = value;
+                        });
+                      }
+                    },
+                  ),
+                  TextFormField(
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                      labelText: 'Senha',
                     ),
-                    TextFormField(
-                      obscureText: true,
-                      decoration: const InputDecoration(
-                        labelText: 'Confirmação da senha',
-                      ),
-                      onChanged: (value) {
-                        if (value != '') {
-                          setState(() {
-                            confirmPass = value;
-                          });
-                        }
-                      },
+                    onChanged: (value) {
+                      if (value != '') {
+                        setState(() {
+                          password = value;
+                        });
+                      }
+                    },
+                  ),
+                  TextFormField(
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                      labelText: 'Confirmação da senha',
                     ),
-                    const SizedBox(height: 50),
-                    OutlinedButton(
-                      style: const ButtonStyle(
-                        elevation: MaterialStatePropertyAll(5),
-                        padding: MaterialStatePropertyAll<EdgeInsets>(
-                          EdgeInsets.only(
-                              top: 20, bottom: 20, left: 100, right: 100),
-                        ),
-                        backgroundColor: MaterialStatePropertyAll<Color>(
-                          Color.fromARGB(255, 206, 228, 180),
-                        ),
+                    onChanged: (value) {
+                      if (value != '') {
+                        setState(() {
+                          confirmPass = value;
+                        });
+                      }
+                    },
+                  ),
+                  const SizedBox(height: 50),
+                  OutlinedButton(
+                    style: const ButtonStyle(
+                      elevation: MaterialStatePropertyAll(5),
+                      padding: MaterialStatePropertyAll<EdgeInsets>(
+                        EdgeInsets.only(
+                            top: 20, bottom: 20, left: 80, right: 80),
                       ),
-                      onPressed: () {
-                        if (AuthFields().formUpValidation(
-                            name, email, password, confirmPass)) {
-                          context.go('/home');
-                        }
-                      },
-                      child: const Text(
-                        'CADASTRAR',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
+                      backgroundColor: MaterialStatePropertyAll<Color>(
+                        Color.fromARGB(255, 206, 228, 180),
                       ),
                     ),
-                  ],
-                ),
+                    onPressed: () {
+                      if (AuthFields().formUpValidation(
+                          name, email, password, confirmPass)) {
+                        context.go('/home');
+                      }
+                    },
+                    child: const Text(
+                      'CADASTRAR',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
               ),
             ),
           ],

@@ -23,7 +23,18 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: <Widget>[
+          TextButton.icon(
+            onPressed: () => {context.push('/logup')},
+            label: const Text(
+              'Conta',
+              style: TextStyle(color: Colors.blueGrey),
+            ),
+            icon: const Icon(Icons.add, color: Colors.blueGrey),
+          ),
+        ],
+      ),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -45,76 +56,71 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            Expanded(
-              flex: 4,
-              child: Container(
-                padding: const EdgeInsets.all(40),
-                margin: const EdgeInsets.all(10),
-                decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    color: Colors.white),
-                child: Column(
-                  children: <Widget>[
-                    TextFormField(
-                      decoration: const InputDecoration(
-                        labelText: 'Nome',
-                      ),
-                      onChanged: (value) {
-                        if (value != '') {
-                          setState(() {
-                            name = value;
-                          });
-                        }
-                      },
+            Container(
+              padding: const EdgeInsets.all(40),
+              margin: const EdgeInsets.all(10),
+              decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  color: Colors.white),
+              child: Column(
+                children: <Widget>[
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      labelText: 'Nome',
                     ),
-                    TextFormField(
-                      obscureText: true,
-                      decoration: const InputDecoration(
-                        labelText: 'Senha',
-                      ),
-                      onChanged: (value) {
-                        if (value != '') {
-                          setState(() {
-                            password = value;
-                          });
-                        }
-                      },
+                    onChanged: (value) {
+                      if (value != '') {
+                        setState(() {
+                          name = value;
+                        });
+                      }
+                    },
+                  ),
+                  TextFormField(
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                      labelText: 'Senha',
                     ),
-                    const SizedBox(height: 50),
-                    OutlinedButton(
-                      style: const ButtonStyle(
-                        elevation: MaterialStatePropertyAll(5),
-                        padding: MaterialStatePropertyAll<EdgeInsets>(
-                          EdgeInsets.only(
-                              top: 20, bottom: 20, left: 100, right: 100),
-                        ),
-                        backgroundColor: MaterialStatePropertyAll<Color>(
-                          Color.fromARGB(255, 206, 228, 180),
-                        ),
+                    onChanged: (value) {
+                      if (value != '') {
+                        setState(() {
+                          password = value;
+                        });
+                      }
+                    },
+                  ),
+                  const SizedBox(height: 50),
+                  OutlinedButton(
+                    style: const ButtonStyle(
+                      elevation: MaterialStatePropertyAll(5),
+                      padding: MaterialStatePropertyAll<EdgeInsets>(
+                        EdgeInsets.only(
+                            top: 20, bottom: 20, left: 100, right: 100),
                       ),
-                      onPressed: () {
-                        if (bloc.AuthFields()
-                            .formInValidation(name, password)) {
-                          context.go('/home');
-                        }
-                      },
+                      backgroundColor: MaterialStatePropertyAll<Color>(
+                        Color.fromARGB(255, 206, 228, 180),
+                      ),
+                    ),
+                    onPressed: () {
+                      if (bloc.AuthFields().formInValidation(name, password)) {
+                        context.go('/home');
+                      }
+                    },
+                    child: const Text(
+                      'ENTRAR',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  TextButton(
+                      onPressed: () => {},
                       child: const Text(
-                        'ENTRAR',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    TextButton(
-                        onPressed: () => {context.push('/logup')},
-                        child: const Text(
-                          'Crie sua conta aqui',
-                          style:
-                              TextStyle(color: Colors.blueGrey, fontSize: 15),
-                        ))
-                  ],
-                ),
+                        'Recuperar cadastro',
+                        style: TextStyle(color: Colors.blueGrey, fontSize: 15),
+                      ))
+                ],
               ),
             ),
           ],
