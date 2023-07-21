@@ -11,8 +11,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  var name;
-  var password;
+  String? name;
+  String? password;
   @override
   void initState() {
     // TODO: implement initState
@@ -115,11 +115,12 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                   TextButton(
-                      onPressed: () => {},
-                      child: const Text(
-                        'Recuperar cadastro',
-                        style: TextStyle(color: Colors.blueGrey, fontSize: 15),
-                      ))
+                    onPressed: () => {},
+                    child: const Text(
+                      'Recuperar cadastro',
+                      style: TextStyle(color: Colors.blueGrey, fontSize: 15),
+                    ),
+                  ),
                 ],
               ),
             ),

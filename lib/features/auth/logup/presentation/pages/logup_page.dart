@@ -10,10 +10,10 @@ class LogupPage extends StatefulWidget {
 }
 
 class _LogupPageState extends State<LogupPage> {
-  var email;
-  var name;
-  var password;
-  var confirmPass;
+  String? email;
+  String? name;
+  String? password;
+  String? confirmPass;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
