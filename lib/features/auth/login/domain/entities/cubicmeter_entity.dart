@@ -12,6 +12,14 @@ class CubicMeter {
   }
 
   String getString() {
-    return '$length(comprimento) x $size(largura) x $heigth(altura) = $cubic metros quadrados.';
+    return '$length(comprimento) x $size(largura) x $heigth(altura) = ${get().toString()} metros quadrados.';
+  }
+
+  bool isEmpty() {
+    if (length == 0 || size == 0 || heigth == 0) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

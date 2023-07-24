@@ -2,8 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:maths_app/features/auth/login/domain/entities/cubicmeter_entity.dart';
-import 'package:maths_app/features/auth/login/presentation/blocs/auth_bloc.dart';
-import 'package:maths_app/features/home/presentation/blocs/home_bloc.dart';
 import 'package:maths_app/features/home/presentation/widgets/form_calc.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,6 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final _cubic = CubicMeter(0, 0, 0);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,8 +48,10 @@ class _HomePageState extends State<HomePage> {
                   onChanged: (value) {
                     if (value != '') {
                       setState(() {
-                        HomeBloc().c$ = double.parse(value);
+                        _cubic.length = double.parse(value);
                       });
+                    } else {
+                      _cubic.length = 0;
                     }
                   },
                 ),
@@ -68,8 +69,10 @@ class _HomePageState extends State<HomePage> {
                   onChanged: (value) {
                     if (value != '') {
                       setState(() {
-                        HomeBloc().l$ = double.parse(value);
+                        _cubic.size = double.parse(value);
                       });
+                    } else {
+                      _cubic.length = 0;
                     }
                   },
                 ),
@@ -87,8 +90,10 @@ class _HomePageState extends State<HomePage> {
                   onChanged: (value) {
                     if (value != '') {
                       setState(() {
-                        HomeBloc().a$ = double.parse(value);
+                        _cubic.heigth = double.parse(value);
                       });
+                    } else {
+                      _cubic.length = 0;
                     }
                   },
                 ),
@@ -107,23 +112,27 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   onPressed: () => {
-                    //instanciate the $cubic, then added it to the global lista, allowing to be accessed in all project
-                    if (kDebugMode) {HomeBloc().a$},
-                    if (!HomeBloc().isEmpty())
+                    if (!_cubic.isEmpty())
                       {
                         setState(() {
-                          var cubic = CubicMeter(
-                              HomeBloc().a$, HomeBloc().c$, HomeBloc().l$);
                           if (kDebugMode) {
-                            print(cubic.getString());
+                            print(_cubic.getString());
                           }
-                          AuthFields().userActual$.value.addCubic(cubic);
+                          //AuthFields().userActual$.value.addCubic(_cubic); //talvez seja melhor dar a opção de salvar o resultado ao user
                           showDialog(
                             context: context,
                             builder: (context) => FormCalcWidgets()
-                                .dialogPopUp(context, cubic.get()),
+                                .dialogPopUp(context, _cubic.get()),
                           );
                         }),
+                      }
+                    else
+                      {
+                        showDialog(
+                          context: context,
+                          builder: (context) =>
+                              FormCalcWidgets().msgPopUp('Campo(s) vazio(s)'),
+                        )
                       },
                   },
                   child: const Text(

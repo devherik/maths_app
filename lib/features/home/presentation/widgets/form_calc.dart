@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:maths_app/features/home/presentation/blocs/home_bloc.dart';
+import 'package:share_plus/share_plus.dart';
 
 class FormCalcWidgets {
   Widget squareForm() {
@@ -31,8 +32,8 @@ class FormCalcWidgets {
         Align(
           alignment: Alignment.topCenter,
           child: TextButton(
-            onPressed: () => {},
-            // {Share.share('$resu metros cúbicos.', subject: 'Resultado.')},
+            onPressed: () =>
+                {Share.share('$resu metros cúbicos.', subject: 'Resultado.')},
             style: const ButtonStyle(
               //padding: MaterialStatePropertyAll<EdgeInsetsGeometry> (EdgeInsetsGeometry),
               backgroundColor: MaterialStatePropertyAll<Color>(Colors.white),
@@ -46,6 +47,24 @@ class FormCalcWidgets {
           ),
         ),
       ],
+    );
+  }
+
+  Widget msgPopUp(String msg) {
+    return AlertDialog(
+      backgroundColor:
+          const Color.fromARGB(255, 206, 228, 180), //app base color
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Text(
+            msg,
+            style: const TextStyle(color: Colors.black, fontSize: 20),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
     );
   }
 }

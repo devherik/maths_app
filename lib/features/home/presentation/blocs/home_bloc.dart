@@ -26,7 +26,7 @@ class HomeBloc {
   // validate functions
 
   bool isEmpty() {
-    if (a$ == 0.0 || c$ == 0.0 || l$ == 0.0) {
+    if (a$ == 0 || c$ == 0 || l$ == 0) {
       return true;
     } else {
       return false;
