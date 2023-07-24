@@ -38,6 +38,7 @@ dependencies:
   go_router: ^9.0.3
   google_fonts: ^5.1.0
   bloc: ^8.1.2
+  share_plus: ^7.0.2
 
 dev_dependencies:
   flutter_test:

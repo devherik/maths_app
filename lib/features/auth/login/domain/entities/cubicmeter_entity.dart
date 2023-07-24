@@ -11,7 +11,7 @@ class CubicMeter {
     return cubic;
   }
 
-  String getString(squ) {
+  String getString() {
     return '$length(comprimento) x $size(largura) x $heigth(altura) = $cubic metros quadrados.';
   }
 }
