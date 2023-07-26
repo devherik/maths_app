@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:maths_app/config/database/app_database.dart';
-import 'package:maths_app/features/auth/login/domain/entities/user_entity.dart';
+import 'package:maths_app/features/log/domain/entities/user_entity.dart';
 
-class AuthFields {
+class UserController {
   final ValueNotifier<UserEntity> userActual$ = ValueNotifier<UserEntity>(
       UserEntity(email: 'email', password: 'password'));
   UserEntity getUser() => userActual$.value;
@@ -10,7 +10,7 @@ class AuthFields {
     if (user != null && password != null) {
       print('$user $password');
       try {
-        userActual$.value = Database().getUser(user);
+        // userActual$.value = Database().getUser(user);
         AuthLog().logIn();
         return true;
       } catch (error) {

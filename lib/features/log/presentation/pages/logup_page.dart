@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:maths_app/features/auth/login/presentation/blocs/auth_bloc.dart';
+import 'package:maths_app/features/log/domain/usecases/user_controller.dart';
 
 class LogupPage extends StatefulWidget {
   const LogupPage({super.key});
@@ -111,7 +111,7 @@ class _LogupPageState extends State<LogupPage> {
                       ),
                     ),
                     onPressed: () {
-                      if (AuthFields().formUpValidation(
+                      if (UserController().formUpValidation(
                           name, email, password, confirmPass)) {
                         context.go('/home');
                       }

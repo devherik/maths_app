@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:maths_app/features/auth/login/presentation/blocs/auth_bloc.dart'
-    as bloc;
+import 'package:maths_app/features/log/domain/usecases/user_controller.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key, String? user});
@@ -102,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     onPressed: () {
-                      if (bloc.AuthFields().formInValidation(name, password)) {
+                      if (UserController().formInValidation(name, password)) {
                         context.go('/home');
                       } //implemet else with error(emptyfilds and usernotfinded)
                     },

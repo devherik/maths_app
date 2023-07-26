@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:maths_app/features/auth/login/presentation/blocs/auth_bloc.dart';
+import 'package:maths_app/features/log/domain/usecases/user_controller.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ReportPage extends StatefulWidget {
@@ -10,8 +10,8 @@ class ReportPage extends StatefulWidget {
 }
 
 class _ReportPageState extends State<ReportPage> {
-  final userActual = AuthFields().getUser();
-  final userCubics = AuthFields().userActual$.value.cubics$.value;
+  final userActual = UserController().getUser();
+  final userCubics = UserController().userActual$.value.cubics$.value;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -199,7 +199,7 @@ class _ReportPageState extends State<ReportPage> {
         onPressed: () => {
           if (userActual.cubics$.value.isEmpty) null,
           if (userActual.cubics$.value.isNotEmpty)
-            Share.share(AuthFields().listTxt())
+            Share.share(UserController().listTxt())
         },
         backgroundColor: const Color.fromARGB(255, 206, 228, 180),
         child: const Icon(Icons.share),

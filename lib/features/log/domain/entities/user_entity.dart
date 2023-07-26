@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:maths_app/features/auth/login/domain/entities/cubicmeter_entity.dart';
-import 'package:maths_app/features/auth/login/domain/entities/squaremeter_entity.dart';
+import 'package:maths_app/features/log/domain/entities/cubicmeter_entity.dart';
+import 'package:maths_app/features/log/domain/entities/squaremeter_entity.dart';
 
 class UserEntity {
   final String? name;

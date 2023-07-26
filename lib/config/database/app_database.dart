@@ -1,7 +1,7 @@
 library globals;
 
 import 'package:flutter/widgets.dart';
-import 'package:maths_app/features/auth/login/domain/entities/user_entity.dart';
+import 'package:maths_app/features/log/domain/entities/user_entity.dart';
 
 class Database extends ValueNotifier<List<UserEntity>> {
   Database() : super(<UserEntity>[]);
