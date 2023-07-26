@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:maths_app/features/home/presentation/blocs/home_bloc.dart';
 import 'package:share_plus/share_plus.dart';
 
 class FormCalcWidgets {
   Widget squareForm() {
-    return Align(alignment: Alignment.center, child: Text('square'));
+    return const Align(alignment: Alignment.center, child: Text('square'));
   }
 
   Widget dialogPopUp(context, resu) {

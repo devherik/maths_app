@@ -4,7 +4,7 @@ import 'package:maths_app/features/auth/login/presentation/blocs/auth_bloc.dart'
     as bloc;
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  const LoginPage({super.key, String? user});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -104,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                     onPressed: () {
                       if (bloc.AuthFields().formInValidation(name, password)) {
                         context.go('/home');
-                      }
+                      } //implemet else with error(emptyfilds and usernotfinded)
                     },
                     child: const Text(
                       'ENTRAR',

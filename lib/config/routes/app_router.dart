@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:maths_app/features/auth/login/presentation/pages/login_page.dart';
 import 'package:maths_app/features/auth/logup/presentation/pages/logup_page.dart';
 import 'package:maths_app/features/home/presentation/pages/home_page.dart';
+import 'package:maths_app/features/report/presentation/pages/report_page.dart';
 
 class AppRouter {
   static GlobalKey<NavigatorState> _routerKey = GlobalKey<NavigatorState>();
@@ -21,7 +22,11 @@ class AppRouter {
         path: '/home',
         builder: (context, state) => const HomePage(),
       ),
+      GoRoute(
+        path: '/report',
+        builder: (context, state) => const ReportPage(),
+      )
     ],
-    initialLocation: '/home',
+    initialLocation: '/login',
   );
 }

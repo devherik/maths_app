@@ -1,15 +1,16 @@
-import 'package:flutter/material.dart';
-import 'package:maths_app/features/auth/login/data/data_sources/app_database.dart'
-    as appDB;
+import 'package:flutter/foundation.dart';
+import 'package:maths_app/config/database/app_database.dart';
 import 'package:maths_app/features/auth/login/domain/entities/user_entity.dart';
 
 class AuthFields {
-  late ValueNotifier<UserEntity> userActual$;
+  final ValueNotifier<UserEntity> userActual$ = ValueNotifier<UserEntity>(
+      UserEntity(email: 'email', password: 'password'));
+  UserEntity getUser() => userActual$.value;
   bool formInValidation(String? user, String? password) {
     if (user != null && password != null) {
       print('$user $password');
       try {
-        userActual$.value = appDB.Database().getUser(user);
+        userActual$.value = Database().getUser(user);
         AuthLog().logIn();
         return true;
       } catch (error) {
@@ -22,12 +23,16 @@ class AuthFields {
 
   bool formUpValidation(
       String? user, String? email, String? password, String? confirmPassword) {
+    if (kDebugMode) print(user);
     if (user != null && password != null && confirmPassword != null) {
+      if (kDebugMode) print(email);
       if (password == confirmPassword) {
         try {
+          if (kDebugMode) print(password);
           userActual$.value =
               UserEntity(email: email, password: password, name: user);
           AuthLog().logIn();
+          Database().addUser(userActual$.value);
           return true;
         } catch (error) {
           return false;
@@ -35,6 +40,14 @@ class AuthFields {
       }
     }
     return false;
+  }
+
+  String listTxt() {
+    String txt = '';
+    for (var i in userActual$.value.cubics$.value) {
+      txt += '${i.getString()} \n';
+    }
+    return txt;
   }
 }
 

@@ -1,11 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_router/go_router.dart';
+import 'package:maths_app/config/database/app_database.dart';
 import 'package:maths_app/features/auth/login/domain/entities/cubicmeter_entity.dart';
+import 'package:maths_app/features/home/presentation/blocs/home_bloc.dart';
 import 'package:maths_app/features/home/presentation/widgets/form_calc.dart';
+import 'package:share_plus/share_plus.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({super.key, String? user});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -18,6 +22,93 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(),
+      drawer: Drawer(
+        backgroundColor: const Color.fromARGB(
+          255,
+          206,
+          228,
+          180,
+        ),
+        child: Container(
+          margin: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(5),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(25),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              SizedBox(
+                height: 120,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Seja muito bem vindo ${Database().globalUser.name}',
+                    style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blueGrey),
+                  ),
+                ),
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: TextButton.icon(
+                  onPressed: () => {context.push('/report')},
+                  style: const ButtonStyle(),
+                  icon: const Icon(Icons.lock_clock, color: Colors.blueGrey),
+                  label: const Text(
+                    'RELATORIO',
+                    style: TextStyle(color: Colors.blueGrey),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: TextButton.icon(
+                  onPressed: () => {
+                    Share.share('https://github.com/devherik/um-dos-app',
+                        subject: 'GitHub Project Page')
+                  },
+                  style: const ButtonStyle(),
+                  icon: const Icon(Icons.share, color: Colors.blueGrey),
+                  label: const Text(
+                    'COMPARTILHAR',
+                    style: TextStyle(color: Colors.blueGrey),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Align(
+                alignment: Alignment.topLeft,
+                child: TextButton.icon(
+                  onPressed: () => {HomeBloc().closeApp()},
+                  style: const ButtonStyle(),
+                  icon: const Icon(Icons.close, color: Colors.blueGrey),
+                  label: const Text(
+                    'FECHAR',
+                    style: TextStyle(color: Colors.blueGrey),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              const Expanded(
+                child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Text('version 0.3')),
+              ),
+            ],
+          ),
+        ),
+      ),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -118,7 +209,8 @@ class _HomePageState extends State<HomePage> {
                           if (kDebugMode) {
                             print(_cubic.getString());
                           }
-                          //AuthFields().userActual$.value.addCubic(_cubic); //talvez seja melhor dar a opção de salvar o resultado ao user
+                          Database().globalUser.addCubic(
+                              _cubic); //talvez seja melhor dar a opção de salvar o resultado ao user
                           showDialog(
                             context: context,
                             builder: (context) => FormCalcWidgets()
