@@ -2,10 +2,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:maths_app/config/database/app_database.dart';
 import 'package:maths_app/features/home/presentation/blocs/home_bloc.dart';
 import 'package:maths_app/features/home/presentation/widgets/form_calc.dart';
 import 'package:maths_app/features/log/domain/entities/cubicmeter_entity.dart';
+import 'package:maths_app/features/log/domain/usecases/user_controller.dart';
 import 'package:share_plus/share_plus.dart';
 
 class HomePage extends StatefulWidget {
@@ -15,7 +15,18 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
+// forms não estão funcionando cooretamente
+// usuario não aparece logadp
+
 class _HomePageState extends State<HomePage> {
+  // @override
+  // void initState() {
+  //   if (!UserState().value) {
+  //     context.go('/login');
+  //   }
+  //   super.initState();
+  // }
+
   final _cubic = CubicMeter(0, 0, 0);
   @override
   Widget build(BuildContext context) {
@@ -43,12 +54,15 @@ class _HomePageState extends State<HomePage> {
                 height: 120,
                 child: Align(
                   alignment: Alignment.center,
-                  child: Text(
-                    'Seja muito bem vindo ${Database().globalUser.name}',
-                    style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blueGrey),
+                  child: ValueListenableBuilder(
+                    valueListenable: UserController().userActual$,
+                    builder: (_, value, __) => Text(
+                      'Seja muito bem vindo, ${value.name}',
+                      style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.blueGrey),
+                    ),
                   ),
                 ),
               ),
@@ -209,7 +223,7 @@ class _HomePageState extends State<HomePage> {
                           if (kDebugMode) {
                             print(_cubic.getString());
                           }
-                          Database().globalUser.addCubic(
+                          UserController().userActual$.value.addCubic(
                               _cubic); //talvez seja melhor dar a opção de salvar o resultado ao user
                           showDialog(
                             context: context,

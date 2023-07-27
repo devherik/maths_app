@@ -1,20 +1,24 @@
 import 'package:flutter/foundation.dart';
 import 'package:maths_app/config/database/app_database.dart';
+import 'package:maths_app/config/database/app_userstate.dart';
 import 'package:maths_app/features/log/domain/entities/user_entity.dart';
 
 class UserController {
   final ValueNotifier<UserEntity> userActual$ = ValueNotifier<UserEntity>(
-      UserEntity(email: 'email', password: 'password'));
+      UserEntity(email: 'email', password: 'password', name: 'name'));
+
   UserEntity getUser() => userActual$.value;
+
   bool formInValidation(String? user, String? password) {
     if (user != null && password != null) {
-      print('$user $password');
       try {
         // userActual$.value = Database().getUser(user);
-        AuthLog().logIn();
+        UserState().logIn();
         return true;
       } catch (error) {
-        print(error.toString());
+        if (kDebugMode) {
+          print(error);
+        }
         return false;
       }
     }
@@ -23,18 +27,22 @@ class UserController {
 
   bool formUpValidation(
       String? user, String? email, String? password, String? confirmPassword) {
-    if (kDebugMode) print(user);
-    if (user != null && password != null && confirmPassword != null) {
-      if (kDebugMode) print(email);
+    if (user != null &&
+        password != null &&
+        confirmPassword != null &&
+        email != null) {
+      if (kDebugMode) print('$user, $email, $password, $confirmPassword');
       if (password == confirmPassword) {
         try {
-          if (kDebugMode) print(password);
           userActual$.value =
               UserEntity(email: email, password: password, name: user);
-          AuthLog().logIn();
+          UserState().logIn();
           Database().addUser(userActual$.value);
           return true;
         } catch (error) {
+          if (kDebugMode) {
+            print(error);
+          }
           return false;
         }
       }
@@ -48,16 +56,5 @@ class UserController {
       txt += '${i.getString()} \n';
     }
     return txt;
-  }
-}
-
-class AuthLog extends ValueNotifier<bool> {
-  // vai sempre devolver um bool com a situação do usuario, logado ou não
-  AuthLog() : super(false); // construtor que passa false quando é criado
-
-  logIn() => value = true;
-  logOut() => value = false;
-  bool isLogged() {
-    return value;
   }
 }

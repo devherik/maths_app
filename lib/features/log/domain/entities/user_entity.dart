@@ -9,7 +9,7 @@ class UserEntity {
   ValueNotifier<List<CubicMeter>> cubics$ = ValueNotifier([]);
   ValueNotifier<List<SquareMeter>> squares$ = ValueNotifier([]);
 
-  UserEntity({required this.email, required this.password, this.name});
+  UserEntity({required this.email, required this.password, required this.name});
 
   dynamic getName() => name;
   dynamic getEmail() => email;

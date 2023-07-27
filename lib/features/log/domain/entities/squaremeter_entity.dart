@@ -13,4 +13,12 @@ class SquareMeter {
   String getString(squ) {
     return '$length(comprimento) x $size(largura) = $square metros quadrados.';
   }
+
+  bool isEmpty() {
+    if (length == 0 || size == 0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
