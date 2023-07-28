@@ -11,12 +11,14 @@ class UserController {
   final TextEditingController controllerPassVali = TextEditingController();
   final ValueNotifier error$ = ValueNotifier('');
 
-  Future<bool> signInWithEmailAndPassword() async {
+  Future<bool> signInWithEmailAndPassword(email, password) async {
+    print('$email // $password');
     try {
       await UserState().signInWithEmailAndPassword(
-        email: controllerEmail.text,
-        password: controllerPassword.text,
+        email: email,
+        password: password,
       );
+      print(controllerEmail.text);
       return true;
     } on FirebaseException catch (e) {
       error$.value = e.message;
@@ -24,12 +26,13 @@ class UserController {
     }
   }
 
-  Future<bool> createUserWithEmailAndPassword() async {
-    if (controllerPassword == controllerPassVali) {
+  Future<bool> createUserWithEmailAndPassword(
+      email, password, passwordValidate) async {
+    if (password == passwordValidate) {
       try {
         await UserState().createUserWithEmailAndPassword(
-          email: controllerEmail.text,
-          password: controllerPassword.text,
+          email: email,
+          password: password,
         );
         return true;
       } on FirebaseException catch (e) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:maths_app/features/log/domain/usecases/user_controller.dart';
 
 class LogupPage extends StatefulWidget {
@@ -9,6 +10,9 @@ class LogupPage extends StatefulWidget {
 }
 
 class _LogupPageState extends State<LogupPage> {
+  String _email = '';
+  String _password = '';
+  String _passwordValidate = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,24 +48,33 @@ class _LogupPageState extends State<LogupPage> {
               child: Column(
                 children: <Widget>[
                   TextFormField(
-                    controller: UserController().controllerEmail,
+                    //controller: UserController().controllerEmail,
                     decoration: const InputDecoration(
                       labelText: 'E-mail',
                     ),
+                    onChanged: (value) => setState(() {
+                      _email = value;
+                    }),
                   ),
                   TextFormField(
-                    controller: UserController().controllerPassword,
+                    //controller: UserController().controllerPassword,
                     obscureText: true,
                     decoration: const InputDecoration(
                       labelText: 'Senha',
                     ),
+                    onChanged: (value) => setState(() {
+                      _password = value;
+                    }),
                   ),
                   TextFormField(
-                    controller: UserController().controllerPassVali,
+                    //controller: UserController().controllerPassVali,
                     obscureText: true,
                     decoration: const InputDecoration(
                       labelText: 'Confirmação da senha',
                     ),
+                    onChanged: (value) => setState(() {
+                      _passwordValidate = value;
+                    }),
                   ),
                   const SizedBox(height: 50),
                   OutlinedButton(
@@ -76,7 +89,9 @@ class _LogupPageState extends State<LogupPage> {
                       ),
                     ),
                     onPressed: () {
-                      UserController().createUserWithEmailAndPassword();
+                      UserController().createUserWithEmailAndPassword(
+                          _email, _password, _passwordValidate);
+                      context.pop();
                     },
                     child: const Text(
                       'CADASTRAR',

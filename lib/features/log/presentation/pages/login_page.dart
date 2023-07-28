@@ -13,6 +13,9 @@ class _LoginPageState extends State<LoginPage> {
   String? error = '';
   bool isLogin = true;
 
+  String _email = '';
+  String _password = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,17 +62,23 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 children: <Widget>[
                   TextFormField(
-                    controller: UserController().controllerEmail,
+                    //controller: UserController().controllerEmail,
                     decoration: const InputDecoration(
                       labelText: 'Email',
                     ),
+                    onChanged: (value) => setState(() {
+                      _email = value;
+                    }),
                   ),
                   TextFormField(
-                    controller: UserController().controllerPassword,
+                    //controller: UserController().controllerPassword,
                     obscureText: true,
                     decoration: const InputDecoration(
                       labelText: 'Senha',
                     ),
+                    onChanged: (value) => setState(() {
+                      _password = value;
+                    }),
                   ),
                   ValueListenableBuilder(
                     valueListenable: UserController().error$,
@@ -90,8 +99,8 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     onPressed: () {
-                      UserController().signInWithEmailAndPassword();
-                      context.go('/home');
+                      UserController()
+                          .signInWithEmailAndPassword(_email, _password);
                     },
                     child: const Text(
                       'ENTRAR',
