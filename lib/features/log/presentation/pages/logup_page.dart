@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:maths_app/features/log/domain/usecases/user_controller.dart';
 
 class LogupPage extends StatefulWidget {
@@ -10,10 +9,6 @@ class LogupPage extends StatefulWidget {
 }
 
 class _LogupPageState extends State<LogupPage> {
-  String? email;
-  String? name;
-  String? password;
-  String? confirmPass;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,54 +44,24 @@ class _LogupPageState extends State<LogupPage> {
               child: Column(
                 children: <Widget>[
                   TextFormField(
+                    controller: UserController().controllerEmail,
                     decoration: const InputDecoration(
                       labelText: 'E-mail',
                     ),
-                    onChanged: (value) {
-                      if (value != '') {
-                        setState(() {
-                          email = value;
-                        });
-                      }
-                    },
                   ),
                   TextFormField(
-                    decoration: const InputDecoration(
-                      labelText: 'Nome',
-                    ),
-                    onChanged: (value) {
-                      if (value != '') {
-                        setState(() {
-                          name = value;
-                        });
-                      }
-                    },
-                  ),
-                  TextFormField(
+                    controller: UserController().controllerPassword,
                     obscureText: true,
                     decoration: const InputDecoration(
                       labelText: 'Senha',
                     ),
-                    onChanged: (value) {
-                      if (value != '') {
-                        setState(() {
-                          password = value;
-                        });
-                      }
-                    },
                   ),
                   TextFormField(
+                    controller: UserController().controllerPassVali,
                     obscureText: true,
                     decoration: const InputDecoration(
                       labelText: 'Confirmação da senha',
                     ),
-                    onChanged: (value) {
-                      if (value != '') {
-                        setState(() {
-                          confirmPass = value;
-                        });
-                      }
-                    },
                   ),
                   const SizedBox(height: 50),
                   OutlinedButton(
@@ -111,10 +76,7 @@ class _LogupPageState extends State<LogupPage> {
                       ),
                     ),
                     onPressed: () {
-                      if (UserController().formUpValidation(
-                          name, email, password, confirmPass)) {
-                        context.go('/home');
-                      }
+                      UserController().createUserWithEmailAndPassword();
                     },
                     child: const Text(
                       'CADASTRAR',

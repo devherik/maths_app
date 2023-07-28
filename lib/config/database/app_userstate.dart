@@ -1,12 +1,23 @@
-import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class UserState extends ValueNotifier<bool> {
-  // vai sempre devolver um bool com a situação do usuario, logado ou não
-  UserState() : super(false); // construtor que passa false quando é criado
+class UserState {
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  User? get currentUser => _firebaseAuth.currentUser;
+  Stream<User?> get authStateChanges => _firebaseAuth.authStateChanges();
 
-  logIn() => value = true;
-  logOut() => value = false;
-  bool isLogged() {
-    return value;
+  Future<void> signInWithEmailAndPassword(
+      {required String email, required String password}) async {
+    await _firebaseAuth.signInWithEmailAndPassword(
+        email: email, password: password);
+  }
+
+  Future<void> createUserWithEmailAndPassword(
+      {required String email, required String password}) async {
+    await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email, password: password);
+  }
+
+  Future<void> signOut() async {
+    await _firebaseAuth.signOut();
   }
 }

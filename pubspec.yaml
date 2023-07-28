@@ -39,6 +39,8 @@ dependencies:
   google_fonts: ^5.1.0
   bloc: ^8.1.2
   share_plus: ^7.0.2
+  firebase_core: ^2.15.0
+  firebase_auth: ^4.7.2
 
 dev_dependencies:
   flutter_test:

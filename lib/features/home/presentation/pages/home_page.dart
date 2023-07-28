@@ -1,8 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:maths_app/features/home/presentation/blocs/home_bloc.dart';
+import 'package:maths_app/config/database/app_userstate.dart';
 import 'package:maths_app/features/home/presentation/widgets/form_calc.dart';
 import 'package:maths_app/features/log/domain/entities/cubicmeter_entity.dart';
 import 'package:maths_app/features/log/domain/usecases/user_controller.dart';
@@ -15,17 +16,12 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-// forms não estão funcionando cooretamente
-// usuario não aparece logadp
-
 class _HomePageState extends State<HomePage> {
-  // @override
-  // void initState() {
-  //   if (!UserState().value) {
-  //     context.go('/login');
-  //   }
-  //   super.initState();
-  // }
+  final User? user = UserState().currentUser;
+
+  Future<void> signOut() async {
+    await UserState().signOut();
+  }
 
   final _cubic = CubicMeter(0, 0, 0);
   @override
@@ -54,15 +50,12 @@ class _HomePageState extends State<HomePage> {
                 height: 120,
                 child: Align(
                   alignment: Alignment.center,
-                  child: ValueListenableBuilder(
-                    valueListenable: UserController().userActual$,
-                    builder: (_, value, __) => Text(
-                      'Seja muito bem vindo, ${value.name}',
-                      style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.blueGrey),
-                    ),
+                  child: Text(
+                    'Seja muito bem vindo, ${user?.email}',
+                    style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blueGrey),
                   ),
                 ),
               ),
@@ -102,11 +95,11 @@ class _HomePageState extends State<HomePage> {
               Align(
                 alignment: Alignment.topLeft,
                 child: TextButton.icon(
-                  onPressed: () => {HomeBloc().closeApp()},
+                  onPressed: () => {signOut()},
                   style: const ButtonStyle(),
                   icon: const Icon(Icons.close, color: Colors.blueGrey),
                   label: const Text(
-                    'FECHAR',
+                    'SAIR',
                     style: TextStyle(color: Colors.blueGrey),
                   ),
                 ),

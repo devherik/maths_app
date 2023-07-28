@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "533817036463",
+    "project_id": "mathsfirebase",
+    "storage_bucket": "mathsfirebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:533817036463:android:b76a06bd0a82be776d8e5a",
+        "android_client_info": {
+          "package_name": "com.example.maths_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "533817036463-dos8gdugs8kkqjdatgfc59s0dubehbja.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCh0mWb_Ydt9cHnuAEP538VfYBK91FY2yA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "533817036463-dos8gdugs8kkqjdatgfc59s0dubehbja.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

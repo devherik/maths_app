@@ -1,9 +1,47 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 import 'package:maths_app/config/database/app_database.dart';
 import 'package:maths_app/config/database/app_userstate.dart';
 import 'package:maths_app/features/log/domain/entities/user_entity.dart';
 
 class UserController {
+  final TextEditingController controllerEmail = TextEditingController();
+  final TextEditingController controllerPassword = TextEditingController();
+  final TextEditingController controllerPassVali = TextEditingController();
+  final ValueNotifier error$ = ValueNotifier('');
+
+  Future<bool> signInWithEmailAndPassword() async {
+    try {
+      await UserState().signInWithEmailAndPassword(
+        email: controllerEmail.text,
+        password: controllerPassword.text,
+      );
+      return true;
+    } on FirebaseException catch (e) {
+      error$.value = e.message;
+      return false;
+    }
+  }
+
+  Future<bool> createUserWithEmailAndPassword() async {
+    if (controllerPassword == controllerPassVali) {
+      try {
+        await UserState().createUserWithEmailAndPassword(
+          email: controllerEmail.text,
+          password: controllerPassword.text,
+        );
+        return true;
+      } on FirebaseException catch (e) {
+        error$.value = e.message;
+        return false;
+      }
+    } else {
+      error$.value = 'Senhas diferentes';
+      return false;
+    }
+  }
+
   final ValueNotifier<UserEntity> userActual$ = ValueNotifier<UserEntity>(
       UserEntity(email: 'email', password: 'password', name: 'name'));
 
@@ -12,8 +50,6 @@ class UserController {
   bool formInValidation(String? user, String? password) {
     if (user != null && password != null) {
       try {
-        // userActual$.value = Database().getUser(user);
-        UserState().logIn();
         return true;
       } catch (error) {
         if (kDebugMode) {
@@ -36,7 +72,7 @@ class UserController {
         try {
           userActual$.value =
               UserEntity(email: email, password: password, name: user);
-          UserState().logIn();
+
           Database().addUser(userActual$.value);
           return true;
         } catch (error) {

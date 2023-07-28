@@ -10,13 +10,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String? name;
-  String? password;
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
+  String? error = '';
+  bool isLogin = true;
 
   @override
   Widget build(BuildContext context) {
@@ -64,29 +59,23 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 children: <Widget>[
                   TextFormField(
+                    controller: UserController().controllerEmail,
                     decoration: const InputDecoration(
-                      labelText: 'Nome',
+                      labelText: 'Email',
                     ),
-                    onChanged: (value) {
-                      if (value != '') {
-                        setState(() {
-                          name = value;
-                        });
-                      }
-                    },
                   ),
                   TextFormField(
+                    controller: UserController().controllerPassword,
                     obscureText: true,
                     decoration: const InputDecoration(
                       labelText: 'Senha',
                     ),
-                    onChanged: (value) {
-                      if (value != '') {
-                        setState(() {
-                          password = value;
-                        });
-                      }
-                    },
+                  ),
+                  ValueListenableBuilder(
+                    valueListenable: UserController().error$,
+                    builder: (context, value, child) => Text(
+                      value == '' ? '' : 'Então ? $value',
+                    ),
                   ),
                   const SizedBox(height: 50),
                   OutlinedButton(
@@ -101,9 +90,8 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     onPressed: () {
-                      if (UserController().formInValidation(name, password)) {
-                        context.go('/home');
-                      } //implemet else with error(emptyfilds and usernotfinded)
+                      UserController().signInWithEmailAndPassword();
+                      context.go('/home');
                     },
                     child: const Text(
                       'ENTRAR',
