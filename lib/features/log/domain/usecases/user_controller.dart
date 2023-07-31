@@ -9,24 +9,20 @@ class UserController {
   final TextEditingController controllerEmail = TextEditingController();
   final TextEditingController controllerPassword = TextEditingController();
   final TextEditingController controllerPassVali = TextEditingController();
-  final ValueNotifier error$ = ValueNotifier('');
+  ValueNotifier error$ = ValueNotifier('');
 
-  Future<bool> signInWithEmailAndPassword(email, password) async {
-    print('$email // $password');
+  Future<void> signInWithEmailAndPassword(email, password) async {
     try {
       await UserState().signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-      print(controllerEmail.text);
-      return true;
     } on FirebaseException catch (e) {
-      error$.value = e.message;
-      return false;
+      error$.value = 'Usuário não encontrado';
     }
   }
 
-  Future<bool> createUserWithEmailAndPassword(
+  Future<void> createUserWithEmailAndPassword(
       email, password, passwordValidate) async {
     if (password == passwordValidate) {
       try {
@@ -34,14 +30,12 @@ class UserController {
           email: email,
           password: password,
         );
-        return true;
       } on FirebaseException catch (e) {
         error$.value = e.message;
-        return false;
       }
     } else {
       error$.value = 'Senhas diferentes';
-      return false;
+      print('senhas diferentes');
     }
   }
 

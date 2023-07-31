@@ -10,11 +10,43 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  String? error = '';
+  final error = UserController().error$;
   bool isLogin = true;
 
   String _email = '';
   String _password = '';
+  String _passwordValidate = '';
+
+  @override
+  void initState() {
+    super.initState();
+    error.addListener(() {
+      setState(() {});
+    });
+  }
+
+  Widget formTextField(String? title) {
+    return TextFormField(
+        decoration: InputDecoration(
+          labelText: title,
+        ),
+        onChanged: (value) {
+          switch (title) {
+            case 'Email':
+              setState(() {
+                _email = value;
+              });
+            case 'Senha':
+              setState(() {
+                _password = value;
+              });
+            case 'Repita a senha':
+              setState(() {
+                _passwordValidate = value;
+              });
+          }
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +55,11 @@ class _LoginPageState extends State<LoginPage> {
       appBar: AppBar(
         actions: <Widget>[
           TextButton.icon(
-            onPressed: () => {context.push('/logup')},
+            onPressed: () {
+              setState(() {
+                isLogin = !isLogin;
+              });
+            },
             label: const Text(
               'Conta',
               style: TextStyle(color: Colors.blueGrey),
@@ -61,54 +97,41 @@ class _LoginPageState extends State<LoginPage> {
                   color: Colors.white),
               child: Column(
                 children: <Widget>[
-                  TextFormField(
-                    //controller: UserController().controllerEmail,
-                    decoration: const InputDecoration(
-                      labelText: 'Email',
-                    ),
-                    onChanged: (value) => setState(() {
-                      _email = value;
-                    }),
-                  ),
-                  TextFormField(
-                    //controller: UserController().controllerPassword,
-                    obscureText: true,
-                    decoration: const InputDecoration(
-                      labelText: 'Senha',
-                    ),
-                    onChanged: (value) => setState(() {
-                      _password = value;
-                    }),
-                  ),
-                  ValueListenableBuilder(
-                    valueListenable: UserController().error$,
-                    builder: (context, value, child) => Text(
-                      value == '' ? '' : 'Então ? $value',
-                    ),
-                  ),
+                  formTextField('Email'),
+                  formTextField('Senha'),
+                  !isLogin ? formTextField('Repita a senha') : const SizedBox(),
                   const SizedBox(height: 50),
                   OutlinedButton(
                     style: const ButtonStyle(
                       elevation: MaterialStatePropertyAll(5),
                       padding: MaterialStatePropertyAll<EdgeInsets>(
                         EdgeInsets.only(
-                            top: 20, bottom: 20, left: 100, right: 100),
+                            top: 20, bottom: 20, left: 80, right: 80),
                       ),
                       backgroundColor: MaterialStatePropertyAll<Color>(
                         Color.fromARGB(255, 206, 228, 180),
                       ),
                     ),
                     onPressed: () {
-                      UserController()
-                          .signInWithEmailAndPassword(_email, _password);
+                      if (isLogin) {
+                        UserController()
+                            .signInWithEmailAndPassword(_email, _password);
+                      } else {
+                        UserController().createUserWithEmailAndPassword(
+                            _email, _password, _passwordValidate);
+                      }
                     },
-                    child: const Text(
-                      'ENTRAR',
-                      style: TextStyle(
+                    child: Text(
+                      isLogin ? 'ENTRAR' : 'CADASTRAR',
+                      style: const TextStyle(
                           color: Colors.black,
                           fontSize: 20,
                           fontWeight: FontWeight.bold),
                     ),
+                  ),
+                  Text(
+                    '${error.value}',
+                    style: const TextStyle(color: Colors.redAccent),
                   ),
                   TextButton(
                     onPressed: () => {},

@@ -91,7 +91,7 @@ class _LogupPageState extends State<LogupPage> {
                     onPressed: () {
                       UserController().createUserWithEmailAndPassword(
                           _email, _password, _passwordValidate);
-                      context.pop();
+                      context.pop(); //resolve mas não é o ideal
                     },
                     child: const Text(
                       'CADASTRAR',
