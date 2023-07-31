@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:maths_app/config/database/app_userstate.dart';
+import 'package:maths_app/config/database/user_datastate.dart';
 import 'package:maths_app/features/home/presentation/widgets/form_calc.dart';
-import 'package:maths_app/features/log/domain/entities/cubicmeter_entity.dart';
+import 'package:maths_app/config/database/entities/cubicmeter_entity.dart';
 import 'package:maths_app/features/log/domain/usecases/user_controller.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -56,6 +57,7 @@ class _HomePageState extends State<HomePage> {
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: Colors.blueGrey),
+                    textAlign: TextAlign.center,
                   ),
                 ),
               ),
@@ -64,7 +66,7 @@ class _HomePageState extends State<HomePage> {
                 child: TextButton.icon(
                   onPressed: () => {context.push('/report')},
                   style: const ButtonStyle(),
-                  icon: const Icon(Icons.lock_clock, color: Colors.blueGrey),
+                  icon: const Icon(Icons.history, color: Colors.blueGrey),
                   label: const Text(
                     'RELATORIO',
                     style: TextStyle(color: Colors.blueGrey),
@@ -216,8 +218,11 @@ class _HomePageState extends State<HomePage> {
                           if (kDebugMode) {
                             print(_cubic.getString());
                           }
-                          UserController().userActual$.value.addCubic(
-                              _cubic); //talvez seja melhor dar a opção de salvar o resultado ao user
+                          DataState().addCubic(
+                              _cubic.length,
+                              _cubic.size,
+                              _cubic
+                                  .heigth); //talvez seja melhor dar a opção de salvar o resultado ao user
                           showDialog(
                             context: context,
                             builder: (context) => FormCalcWidgets()

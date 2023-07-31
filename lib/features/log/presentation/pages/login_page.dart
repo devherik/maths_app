@@ -52,22 +52,6 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        actions: <Widget>[
-          TextButton.icon(
-            onPressed: () {
-              setState(() {
-                isLogin = !isLogin;
-              });
-            },
-            label: const Text(
-              'Conta',
-              style: TextStyle(color: Colors.blueGrey),
-            ),
-            icon: const Icon(Icons.add, color: Colors.blueGrey),
-          ),
-        ],
-      ),
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
@@ -87,6 +71,22 @@ class _LoginPageState extends State<LoginPage> {
                     fontSize: 30,
                   ),
                 ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: TextButton.icon(
+                onPressed: () {
+                  setState(() {
+                    isLogin = !isLogin;
+                  });
+                },
+                label: Text(
+                  isLogin ? 'Registrar' : 'Entrar',
+                  style: const TextStyle(color: Colors.blueGrey),
+                ),
+                icon: Icon(isLogin ? Icons.arrow_forward : Icons.arrow_back,
+                    color: Colors.blueGrey),
               ),
             ),
             Container(
@@ -134,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
                     style: const TextStyle(color: Colors.redAccent),
                   ),
                   TextButton(
-                    onPressed: () => {},
+                    onPressed: () => {context.go('/recovery')},
                     child: const Text(
                       'Recuperar cadastro',
                       style: TextStyle(color: Colors.blueGrey, fontSize: 15),
