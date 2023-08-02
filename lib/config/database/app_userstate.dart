@@ -17,6 +17,11 @@ class UserState {
         email: email, password: password);
   }
 
+  String getUid() {
+    final dynamic uid = currentUser?.uid;
+    return uid;
+  }
+
   Future<void> signOut() async {
     await _firebaseAuth.signOut();
   }

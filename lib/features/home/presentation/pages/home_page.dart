@@ -7,7 +7,6 @@ import 'package:maths_app/config/database/app_userstate.dart';
 import 'package:maths_app/config/database/user_datastate.dart';
 import 'package:maths_app/features/home/presentation/widgets/form_calc.dart';
 import 'package:maths_app/config/database/entities/cubicmeter_entity.dart';
-import 'package:maths_app/features/log/domain/usecases/user_controller.dart';
 import 'package:share_plus/share_plus.dart';
 
 class HomePage extends StatefulWidget {
@@ -218,7 +217,7 @@ class _HomePageState extends State<HomePage> {
                           if (kDebugMode) {
                             print(_cubic.getString());
                           }
-                          DataState().addCubic(
+                          DataState().createCubic(
                               _cubic.length,
                               _cubic.size,
                               _cubic

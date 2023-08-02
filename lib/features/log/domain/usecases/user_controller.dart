@@ -1,5 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:maths_app/config/database/app_userstate.dart';
 
 class UserController {
@@ -13,7 +13,9 @@ class UserController {
       );
     } on FirebaseException catch (e) {
       error$.value = e.message;
-      print(error$);
+      if (kDebugMode) {
+        print(error$);
+      }
     }
   }
 
@@ -25,13 +27,25 @@ class UserController {
           email: email,
           password: password,
         );
+        CollectionReference users =
+            FirebaseFirestore.instance.collection('users');
+        try {
+          users.add(UserState()
+              .getUid()); //adiciona a coleção users no firebase um usuario com o id da authentication
+        } on FirebaseException catch (e) {
+          error$.value = e.message;
+        }
       } on FirebaseException catch (e) {
         error$.value = e.message;
-        print(error$);
+        if (kDebugMode) {
+          print(error$);
+        }
       }
     } else {
       error$.value = 'Senhas diferentes';
-      print('senhas diferentes');
+      if (kDebugMode) {
+        print(error$);
+      }
     }
   }
 }
