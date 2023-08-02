@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:maths_app/config/database/user_datastate.dart';
 import 'package:maths_app/features/report/domain/usercases/report_controller.dart';
 import 'package:maths_app/features/report/presentation/widgets/report_widgets.dart';
-import 'package:share_plus/share_plus.dart';
 
 class ReportPage extends StatefulWidget {
   const ReportPage({super.key});
@@ -12,7 +10,6 @@ class ReportPage extends StatefulWidget {
 }
 
 class _ReportPageState extends State<ReportPage> {
-  final cubicsColec = DataState().readCubics();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +49,7 @@ class _ReportPageState extends State<ReportPage> {
                   borderRadius: BorderRadius.circular(25),
                 ),
                 child: SizedBox(
-                  child: ReportWdgets().streamCubics(cubicsColec),
+                  child: ReportWdgets().streamCubics(),
                 ),
               ),
             ),
@@ -60,7 +57,7 @@ class _ReportPageState extends State<ReportPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => {Share.share(ReportController().listTxt(cubicsColec))},
+        onPressed: () => {ReportController().listTxt()},
         backgroundColor: const Color.fromARGB(255, 206, 228, 180),
         child: const Icon(Icons.share),
       ),

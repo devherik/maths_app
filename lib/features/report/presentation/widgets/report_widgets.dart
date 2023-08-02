@@ -1,12 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:maths_app/config/database/user_datastate.dart';
 import 'package:share_plus/share_plus.dart';
 
 class ReportWdgets {
-  Widget? streamCubics(cubics) {
+  Widget streamCubics() {
+    final cubicsCollection = DataState().readCubicsCollection();
     return StreamBuilder(
-      stream: cubics,
+      stream: cubicsCollection,
       builder: (_, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
         if (streamSnapshot.hasData) {
           return ListView.builder(
@@ -37,7 +39,7 @@ class ReportWdgets {
                               mainAxisSize: MainAxisSize.min,
                               children: <Widget>[
                                 Text(
-                                  DataState().getCubicString(doc.id).toString(),
+                                  '${doc.get('comprimento')} + ${doc.get('largura')} + ${doc.get('altura')} = ${doc.get('resultado')}',
                                   style: const TextStyle(
                                       color: Colors.black, fontSize: 20),
                                   textAlign: TextAlign.center,
@@ -52,12 +54,13 @@ class ReportWdgets {
                                   Align(
                                     child: IconButton(
                                       onPressed: () => {
-                                        DataState().deleteCubic(doc),
+                                        DataState().deleteCubicDocument(doc.id),
+                                        context.pop(),
                                       },
                                       style: const ButtonStyle(
                                         backgroundColor:
                                             MaterialStatePropertyAll<Color>(
-                                                Colors.redAccent),
+                                                Colors.white),
                                         elevation: MaterialStatePropertyAll(5),
                                         alignment: Alignment.center,
                                       ),
@@ -71,9 +74,7 @@ class ReportWdgets {
                                     child: IconButton(
                                       onPressed: () => {
                                         Share.share(
-                                            DataState()
-                                                .getCubicString(doc.id)
-                                                .toString(),
+                                            '${doc.get('comprimento')} + ${doc.get('largura')} + ${doc.get('altura')} = ${doc.get('resultado')}',
                                             subject: 'Resultado.')
                                       },
                                       style: const ButtonStyle(
@@ -94,7 +95,7 @@ class ReportWdgets {
                         );
                       },
                       child: Text(
-                        '${DataState().readCubic(doc).toString()} metros cúbicos.',
+                        '${doc.get('resultado')} metro cúbicos.',
                         style: const TextStyle(
                             fontSize: 20, color: Colors.blueGrey),
                       ),
