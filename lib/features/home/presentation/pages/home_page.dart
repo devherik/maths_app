@@ -3,11 +3,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
-import 'package:maths_app/config/database/app_userstate.dart';
-import 'package:maths_app/config/database/user_datastate.dart';
-import 'package:maths_app/features/home/presentation/widgets/form_calc.dart';
-import 'package:maths_app/config/database/entities/cubicmeter_entity.dart';
 import 'package:share_plus/share_plus.dart';
+
+//maths packages
+import 'package:maths_app/config/database/app_userstate.dart';
+import 'package:maths_app/features/home/presentation/widgets/home_widgets.dart';
+import 'package:maths_app/config/database/entities/cubicmeter_entity.dart';
+import 'package:maths_app/config/globals.dart' as globals;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, String? user});
@@ -28,7 +30,12 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
-      appBar: AppBar(),
+      appBar: AppBar(actions: [
+        Align(
+          alignment: Alignment.centerRight,
+          child: Image.asset(globals.logoImage),
+        )
+      ]),
       drawer: Drawer(
         backgroundColor: const Color.fromARGB(
           255,
@@ -37,96 +44,99 @@ class _HomePageState extends State<HomePage> {
           180,
         ),
         child: Container(
-          margin: const EdgeInsets.only(top: 50, bottom: 20, left: 5, right: 5),
-          padding: const EdgeInsets.all(5),
+          margin:
+              const EdgeInsets.only(top: 50, bottom: 10, left: 10, right: 10),
+          padding: const EdgeInsets.all(15),
           decoration: BoxDecoration(
-            color: Colors.transparent,
+            color: Colors.white60,
             borderRadius: BorderRadius.circular(25),
           ),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-              SizedBox(
-                height: 120,
+              Container(
+                margin: const EdgeInsets.all(15),
+                child: Image.asset(globals.logoImage),
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: Text(
+                  '${user?.email}',
+                  style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(15),
                 child: Align(
                   alignment: Alignment.center,
-                  child: Text(
-                    'Seja muito bem vindo, ${user?.email}',
-                    style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.blueGrey),
-                    textAlign: TextAlign.center,
-                  ),
+                  child: Image.asset('assets/images/usefull/simple_line.png'),
                 ),
               ),
               Align(
                 alignment: Alignment.topLeft,
-                child: TextButton.icon(
-                  onPressed: () => {context.push('/report')},
-                  style: const ButtonStyle(),
-                  icon: const Icon(Icons.history, color: Colors.blueGrey),
-                  label: const Text(
-                    'RELATORIO',
-                    style: TextStyle(color: Colors.blueGrey),
-                  ),
+                child: Row(
+                  children: <Widget>[
+                    const Icon(Icons.history, color: Colors.black),
+                    TextButton(
+                        onPressed: () => context.push('/report'),
+                        child: const Text(
+                          'Meus resultados',
+                          style: TextStyle(color: Colors.black),
+                        )),
+                  ],
                 ),
-              ),
-              const SizedBox(
-                height: 15,
               ),
               Align(
                 alignment: Alignment.topLeft,
-                child: TextButton.icon(
-                  onPressed: () => {
-                    Share.share('https://github.com/devherik/um-dos-app',
-                        subject: 'GitHub Project Page')
-                  },
-                  style: const ButtonStyle(),
-                  icon: const Icon(Icons.share, color: Colors.blueGrey),
-                  label: const Text(
-                    'COMPARTILHAR',
-                    style: TextStyle(color: Colors.blueGrey),
-                  ),
+                child: Row(
+                  children: <Widget>[
+                    const Icon(Icons.share, color: Colors.black),
+                    TextButton(
+                        onPressed: () => Share.share(
+                            'https://github.com/devherik/um-dos-app',
+                            subject: 'GitHub Project Page'),
+                        child: const Text(
+                          'Compartilhe',
+                          style: TextStyle(color: Colors.black),
+                        )),
+                  ],
                 ),
-              ),
-              const SizedBox(
-                height: 15,
               ),
               Align(
                 alignment: Alignment.topLeft,
-                child: TextButton.icon(
-                  onPressed: () => {signOut()},
-                  style: const ButtonStyle(),
-                  icon: const Icon(Icons.close, color: Colors.blueGrey),
-                  label: const Text(
-                    'SAIR',
-                    style: TextStyle(color: Colors.blueGrey),
-                  ),
+                child: Row(
+                  children: <Widget>[
+                    const Icon(Icons.logout_outlined, color: Colors.black),
+                    TextButton(
+                        onPressed: () => signOut(),
+                        child: const Text(
+                          'Sair',
+                          style: TextStyle(color: Colors.black),
+                        )),
+                  ],
                 ),
-              ),
-              const SizedBox(
-                height: 15,
               ),
               const Expanded(
                 child: Align(
                     alignment: Alignment.bottomCenter,
-                    child: Text('version 0.3')),
+                    child: Text('version 0.4')),
               ),
             ],
           ),
         ),
       ),
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('assets/images/background/mint_wallpaper.jpg'),
-              fit: BoxFit.cover),
+              image: AssetImage(globals.backgroundImage), fit: BoxFit.cover),
         ),
         child: Container(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: Colors.transparent),
+              borderRadius: BorderRadius.circular(20), color: Colors.white60),
           padding: const EdgeInsets.all(40),
           margin:
               const EdgeInsets.only(top: 200, bottom: 10, right: 10, left: 10),
@@ -200,48 +210,46 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   height: 30,
                 ),
-                OutlinedButton(
-                  style: const ButtonStyle(
-                    // alignment: AlignmentDirectional.bottomCenter,
-                    elevation: MaterialStatePropertyAll(5),
-                    padding: MaterialStatePropertyAll<EdgeInsets>(
-                        EdgeInsets.only(
-                            top: 20, bottom: 20, left: 80, right: 80)),
-                    backgroundColor: MaterialStatePropertyAll<Color>(
-                      Color.fromARGB(255, 206, 228, 180),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: OutlinedButton(
+                    style: const ButtonStyle(
+                      // alignment: AlignmentDirectional.bottomCenter,
+                      elevation: MaterialStatePropertyAll(5),
+                      padding: MaterialStatePropertyAll<EdgeInsets>(
+                          EdgeInsets.only(
+                              top: 20, bottom: 20, left: 80, right: 80)),
+                      backgroundColor: MaterialStatePropertyAll<Color>(
+                        Color.fromARGB(255, 206, 228, 180),
+                      ),
                     ),
-                  ),
-                  onPressed: () => {
-                    if (!_cubic.isEmpty())
-                      {
-                        setState(() {
-                          if (kDebugMode) {
-                            print(_cubic.getString());
-                          }
-                          DataState().createCubic(
-                              _cubic.length,
-                              _cubic.size,
-                              _cubic
-                                  .heigth); //talvez seja melhor dar a opção de salvar o resultado ao user
+                    onPressed: () => {
+                      if (!_cubic.isEmpty())
+                        {
+                          setState(() {
+                            if (kDebugMode) {
+                              print(_cubic.getString());
+                            }
+                            showDialog(
+                              context: context,
+                              builder: (context) =>
+                                  HomeWidgets().dialogPopUp(context, _cubic),
+                            );
+                          }),
+                        }
+                      else
+                        {
                           showDialog(
                             context: context,
-                            builder: (context) => FormCalcWidgets()
-                                .dialogPopUp(context, _cubic.get()),
-                          );
-                        }),
-                      }
-                    else
-                      {
-                        showDialog(
-                          context: context,
-                          builder: (context) =>
-                              FormCalcWidgets().msgPopUp('Campo(s) vazio(s)'),
-                        )
-                      },
-                  },
-                  child: const Text(
-                    'CALCULAR',
-                    style: TextStyle(color: Colors.black, fontSize: 20),
+                            builder: (context) =>
+                                HomeWidgets().msgPopUp('Campo(s) vazio(s)'),
+                          )
+                        },
+                    },
+                    child: const Text(
+                      'CALCULAR',
+                      style: TextStyle(color: Colors.black, fontSize: 20),
+                    ),
                   ),
                 ),
               ],

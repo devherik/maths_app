@@ -69,6 +69,7 @@ flutter:
   assets:
     - assets/images/background/mint_wallpaper.jpg
     - assets/images/logo/logo_maths.png
+    - assets/images/usefull/simple_line.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

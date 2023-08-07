@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:maths_app/features/report/domain/usercases/report_controller.dart';
 import 'package:maths_app/features/report/presentation/widgets/report_widgets.dart';
+import 'package:maths_app/config/globals.dart' as globals;
 
 class ReportPage extends StatefulWidget {
   const ReportPage({super.key});
@@ -13,32 +15,21 @@ class _ReportPageState extends State<ReportPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(actions: [
+        Align(
+          alignment: Alignment.centerRight,
+          child: Image.asset(globals.logoImage),
+        )
+      ]),
       extendBodyBehindAppBar: true,
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('assets/images/background/mint_wallpaper.jpg'),
-              fit: BoxFit.cover),
+              image: AssetImage(globals.backgroundImage), fit: BoxFit.cover),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: <Widget>[
-            const SizedBox(
-              height: 150,
-              child: Align(
-                alignment: Alignment.center,
-                child: Text(
-                  'HISTÓRICO\\',
-                  softWrap: true,
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 25,
-                      fontWeight: FontWeight.w300),
-                  textAlign: TextAlign.left,
-                ),
-              ),
-            ),
             Expanded(
               flex: 6,
               child: Container(

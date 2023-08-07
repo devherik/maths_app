@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:maths_app/features/log/domain/usecases/user_controller.dart';
+import 'package:maths_app/config/globals.dart' as globals;
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key, String? user});
@@ -53,24 +54,17 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('assets/images/background/mint_wallpaper.jpg'),
-              fit: BoxFit.cover),
+              image: AssetImage(globals.backgroundImage), fit: BoxFit.cover),
         ),
         child: Column(
           children: <Widget>[
-            const Expanded(
+            Expanded(
               flex: 4,
               child: Align(
                 alignment: Alignment.center,
-                child: Text(
-                  'Maths',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 30,
-                  ),
-                ),
+                child: Image.asset(globals.logoImage),
               ),
             ),
             Align(

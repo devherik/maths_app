@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:maths_app/features/log/domain/usecases/user_controller.dart';
+import 'package:maths_app/config/globals.dart' as globals;
 
 class RecoveryPage extends StatefulWidget {
   const RecoveryPage({super.key});
@@ -16,22 +17,21 @@ class _RecoveryPageState extends State<RecoveryPage> {
       appBar: AppBar(),
       extendBodyBehindAppBar: true,
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('assets/images/background/mint_wallpaper.jpg'),
-              fit: BoxFit.cover),
+              image: AssetImage(globals.backgroundImage), fit: BoxFit.cover),
         ),
         child: Container(
           padding: const EdgeInsets.all(40),
           margin: const EdgeInsets.all(10),
           decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(20)),
-              color: Colors.white),
+              color: Colors.transparent),
           child: Column(
             children: <Widget>[
               const Align(
                 alignment: Alignment.center,
-                child: Text('Receba um e-mail para resetar sua senha.'),
+                child: Text('Receba um e-mail para restaurar sua senha.'),
               ),
               Align(
                 alignment: Alignment.center,

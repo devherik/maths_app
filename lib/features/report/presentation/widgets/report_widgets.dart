@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:maths_app/config/database/user_datastate.dart';
 import 'package:share_plus/share_plus.dart';
+
+import 'package:maths_app/config/database/user_datastate.dart';
 
 class ReportWdgets {
   Widget streamCubics() {
@@ -61,7 +62,7 @@ class ReportWdgets {
                                       style: const ButtonStyle(
                                         backgroundColor:
                                             MaterialStatePropertyAll<Color>(
-                                                Colors.white),
+                                                Colors.transparent),
                                         elevation: MaterialStatePropertyAll(5),
                                         alignment: Alignment.center,
                                       ),
@@ -82,7 +83,7 @@ class ReportWdgets {
                                         //padding: MaterialStatePropertyAll<EdgeInsetsGeometry> (EdgeInsetsGeometry),
                                         backgroundColor:
                                             MaterialStatePropertyAll<Color>(
-                                                Colors.white),
+                                                Colors.transparent),
                                         elevation: MaterialStatePropertyAll(5),
                                         alignment: Alignment.center,
                                       ),
@@ -97,8 +98,8 @@ class ReportWdgets {
                       },
                       child: Text(
                         '${doc.get('resultado')} metro cúbicos.',
-                        style: const TextStyle(
-                            fontSize: 20, color: Colors.blueGrey),
+                        style:
+                            const TextStyle(fontSize: 20, color: Colors.black),
                       ),
                     ),
                   ),
