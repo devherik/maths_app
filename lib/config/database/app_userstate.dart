@@ -17,6 +17,10 @@ class UserState {
         email: email, password: password);
   }
 
+  Future<void> resetPassword({required String email}) async {
+    await _firebaseAuth.sendPasswordResetEmail(email: email);
+  }
+
   String getUid() {
     final dynamic uid = currentUser?.uid;
     return uid;

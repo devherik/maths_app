@@ -3,11 +3,16 @@ import 'package:maths_app/features/home/presentation/pages/home_page.dart';
 import 'package:maths_app/features/log/presentation/pages/login_page.dart';
 import 'package:maths_app/features/log/presentation/pages/recovery_page.dart';
 import 'package:maths_app/features/report/presentation/pages/report_page.dart';
+import 'package:maths_app/features/welcome_page.dart';
 import 'package:maths_app/widget_tree.dart';
 
 class AppRouter {
   final router = GoRouter(
     routes: [
+      GoRoute(
+        path: '/welcome',
+        builder: (context, state) => const WelcomePage(),
+      ),
       GoRoute(
         path: '/login',
         builder: (context, state) => const LoginPage(),

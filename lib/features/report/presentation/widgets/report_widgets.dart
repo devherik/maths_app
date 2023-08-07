@@ -21,11 +21,12 @@ class ReportWdgets {
                   Text(
                     "${index.toString()} | ",
                     style: const TextStyle(
-                        color: Color.fromARGB(255, 206, 228, 180),
+                        color: Color.fromARGB(255, 100, 161, 30),
                         fontWeight: FontWeight.bold,
                         fontSize: 20),
                   ),
                   Expanded(
+                    flex: 8,
                     child: TextButton(
                       onPressed: () {
                         showDialog(

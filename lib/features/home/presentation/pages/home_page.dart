@@ -37,10 +37,10 @@ class _HomePageState extends State<HomePage> {
           180,
         ),
         child: Container(
-          margin: const EdgeInsets.all(10),
+          margin: const EdgeInsets.only(top: 50, bottom: 20, left: 5, right: 5),
           padding: const EdgeInsets.all(5),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Colors.transparent,
             borderRadius: BorderRadius.circular(25),
           ),
           child: Column(
@@ -125,7 +125,8 @@ class _HomePageState extends State<HomePage> {
         ),
         child: Container(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20), color: Colors.white),
+              borderRadius: BorderRadius.circular(20),
+              color: Colors.transparent),
           padding: const EdgeInsets.all(40),
           margin:
               const EdgeInsets.only(top: 200, bottom: 10, right: 10, left: 10),

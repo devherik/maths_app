@@ -48,6 +48,14 @@ class UserController {
       }
     }
   }
+
+  Future<void> resetPassword(String value) async {
+    try {
+      await UserState().resetPassword(email: value);
+    } on FirebaseException catch (e) {
+      error$.value = e.message;
+    }
+  }
 }
 //   final ValueNotifier<UserEntity> userActual$ = ValueNotifier<UserEntity>(
 //       UserEntity(email: 'email', password: 'password', name: 'name'));

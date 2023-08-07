@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:maths_app/config/database/app_userstate.dart';
 import 'package:maths_app/features/home/presentation/pages/home_page.dart';
-import 'package:maths_app/features/log/presentation/pages/login_page.dart';
+import 'package:maths_app/features/welcome_page.dart';
 
 class WidgetTree extends StatefulWidget {
   const WidgetTree({super.key});
@@ -19,7 +19,7 @@ class _WidgetTreeState extends State<WidgetTree> {
         if (snapshot.hasData) {
           return const HomePage();
         } else {
-          return const LoginPage();
+          return const WelcomePage();
         }
       },
     );

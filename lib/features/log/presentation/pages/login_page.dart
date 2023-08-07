@@ -94,7 +94,7 @@ class _LoginPageState extends State<LoginPage> {
               margin: const EdgeInsets.all(10),
               decoration: const BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(20)),
-                  color: Colors.white),
+                  color: Colors.transparent),
               child: Column(
                 children: <Widget>[
                   formTextField('Email'),
@@ -119,6 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                       } else {
                         UserController().createUserWithEmailAndPassword(
                             _email, _password, _passwordValidate);
+                        context.pop();
                       }
                     },
                     child: Text(
@@ -134,7 +135,7 @@ class _LoginPageState extends State<LoginPage> {
                     style: const TextStyle(color: Colors.redAccent),
                   ),
                   TextButton(
-                    onPressed: () => {context.go('/recovery')},
+                    onPressed: () => {context.push('/recovery')},
                     child: const Text(
                       'Recuperar cadastro',
                       style: TextStyle(color: Colors.blueGrey, fontSize: 15),
