@@ -6,6 +6,7 @@ import 'package:maths_app/config/theme/app_theme.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  await Future.delayed(const Duration(seconds: 10));
   runApp(const MyApp());
 }
 

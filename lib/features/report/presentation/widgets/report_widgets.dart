@@ -97,7 +97,7 @@ class ReportWdgets {
                         );
                       },
                       child: Text(
-                        '${doc.get('resultado')} metro cúbicos.',
+                        '${doc.get('resultado')} metros cúbico.',
                         style:
                             const TextStyle(fontSize: 20, color: Colors.black),
                       ),

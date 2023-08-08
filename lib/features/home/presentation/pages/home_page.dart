@@ -69,12 +69,9 @@ class _HomePageState extends State<HomePage> {
                   textAlign: TextAlign.center,
                 ),
               ),
-              Container(
-                margin: EdgeInsets.all(15),
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Image.asset('assets/images/usefull/simple_line.png'),
-                ),
+              const Padding(
+                padding: EdgeInsets.only(top: 25, bottom: 25),
+                child: Divider(color: Colors.black, thickness: 2),
               ),
               Align(
                 alignment: Alignment.topLeft,
@@ -90,6 +87,7 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
+              const Divider(color: Colors.blueGrey, thickness: 1),
               Align(
                 alignment: Alignment.topLeft,
                 child: Row(
@@ -106,6 +104,7 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
+              const Divider(color: Colors.blueGrey, thickness: 1),
               Align(
                 alignment: Alignment.topLeft,
                 child: Row(
@@ -120,6 +119,7 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
+              const Divider(color: Colors.blueGrey, thickness: 1),
               const Expanded(
                 child: Align(
                     alignment: Alignment.bottomCenter,
