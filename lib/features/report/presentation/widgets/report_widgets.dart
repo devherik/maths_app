@@ -39,7 +39,7 @@ class ReportWdgets {
                             mainAxisSize: MainAxisSize.min,
                             children: <Widget>[
                               Text(
-                                '${doc.get('comprimento')} + ${doc.get('largura')} + ${doc.get('altura')} = ${doc.get('resultado')}',
+                                '${doc.get('comprimento')} comprimento\n+ ${doc.get('largura')} largura\n+ ${doc.get('altura')} altura\n= ${doc.get('resultado')} total',
                                 style: const TextStyle(
                                     color: Colors.black, fontSize: 20),
                                 textAlign: TextAlign.center,
@@ -53,7 +53,8 @@ class ReportWdgets {
                               children: <Widget>[
                                 Align(
                                   child: TextButton(
-                                    onPressed: () => {
+                                    onPressed: null,
+                                    onLongPress: () => {
                                       DataState().deleteCubicDocument(doc.id),
                                       context.pop(),
                                     },
@@ -76,11 +77,10 @@ class ReportWdgets {
                                   child: TextButton(
                                     onPressed: () => {
                                       Share.share(
-                                          '${doc.get('comprimento')} + ${doc.get('largura')} + ${doc.get('altura')} = ${doc.get('resultado')}',
+                                          '${doc.get('comprimento')} comprimento\n+ ${doc.get('largura')} largura\n+ ${doc.get('altura')} altura\n= ${doc.get('resultado')} total',
                                           subject: 'Resultado.')
                                     },
                                     style: const ButtonStyle(
-                                      //padding: MaterialStatePropertyAll<EdgeInsetsGeometry> (EdgeInsetsGeometry),
                                       backgroundColor:
                                           MaterialStatePropertyAll<Color>(
                                               Colors.white),
