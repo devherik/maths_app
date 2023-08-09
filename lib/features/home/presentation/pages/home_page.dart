@@ -137,12 +137,12 @@ class _HomePageState extends State<HomePage> {
         child: Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20), color: Colors.white60),
-          padding: const EdgeInsets.all(40),
+          padding: const EdgeInsets.only(left: 40, right: 40),
           margin:
-              const EdgeInsets.only(top: 200, bottom: 10, right: 10, left: 10),
+              const EdgeInsets.only(top: 200, bottom: 100, right: 10, left: 10),
           child: Align(
             alignment: Alignment.center,
-            child: Column(
+            child: ListView(
               children: <Widget>[
                 TextFormField(
                   textAlign: TextAlign.center,

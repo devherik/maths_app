@@ -44,6 +44,12 @@ dependencies:
   cloud_firestore: ^4.8.4
   flutter_native_splash: ^2.3.1
 
+flutter_native_splash:
+  android: true
+  ios: true
+  background_image: 'assets/images/background/mint_wallpaper.jpg'
+  image: 'assets/images/logo/logo_maths.png'
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
