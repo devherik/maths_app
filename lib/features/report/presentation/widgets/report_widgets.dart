@@ -48,8 +48,8 @@ class ReportWdgets {
                           ),
                           actions: [
                             Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
                                 Align(
                                   child: TextButton(
@@ -67,8 +67,8 @@ class ReportWdgets {
                                     child: const Text(
                                       'EXCLUIR',
                                       style: TextStyle(
-                                          color: Colors.red,
-                                          fontWeight: FontWeight.bold),
+                                        color: Colors.red,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -90,8 +90,8 @@ class ReportWdgets {
                                     child: const Text(
                                       'COMPARTILHAR',
                                       style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold),
+                                        color: Colors.black,
+                                      ),
                                     ),
                                   ),
                                 ),

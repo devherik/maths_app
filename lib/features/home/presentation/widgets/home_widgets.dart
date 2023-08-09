@@ -33,12 +33,13 @@ class HomeWidgets {
         Align(
             alignment: Alignment.topCenter,
             child: Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 TextButton(
                   onPressed: () =>
                       {Share.share(c.getString(), subject: 'Resultado.')},
                   style: const ButtonStyle(
-                    //padding: MaterialStatePropertyAll<EdgeInsetsGeometry> (EdgeInsetsGeometry),
                     backgroundColor:
                         MaterialStatePropertyAll<Color>(Colors.white),
                     elevation: MaterialStatePropertyAll(5),
@@ -54,7 +55,6 @@ class HomeWidgets {
                     DataState().createCubic(c.length, c.size, c.heigth),
                   },
                   style: const ButtonStyle(
-                    //padding: MaterialStatePropertyAll<EdgeInsetsGeometry> (EdgeInsetsGeometry),
                     backgroundColor:
                         MaterialStatePropertyAll<Color>(Colors.white),
                     elevation: MaterialStatePropertyAll(5),

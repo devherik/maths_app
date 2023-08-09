@@ -19,7 +19,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final User? user = UserState().currentUser;
+  final User? _user = UserState().currentUser;
 
   Future<void> signOut() async {
     await UserState().signOut();
@@ -37,42 +37,56 @@ class _HomePageState extends State<HomePage> {
         )
       ]),
       drawer: Drawer(
-        backgroundColor: const Color.fromARGB(
-          255,
-          206,
-          228,
-          180,
-        ),
         child: Container(
-          margin:
-              const EdgeInsets.only(top: 50, bottom: 10, left: 10, right: 10),
-          padding: const EdgeInsets.all(15),
-          decoration: BoxDecoration(
+          padding:
+              const EdgeInsets.only(top: 20, left: 15, right: 15, bottom: 15),
+          decoration: const BoxDecoration(
             color: Colors.white60,
-            borderRadius: BorderRadius.circular(25),
           ),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(
+                    '${_user?.email}',
+                    style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black),
+                    textAlign: TextAlign.center,
+                  ),
+                  IconButton(
+                    icon: const Icon(
+                      Icons.close,
+                      color: Colors.blueGrey,
+                    ),
+                    onPressed: () => context.pop(),
+                  ),
+                ],
+              ),
               Container(
                 margin: const EdgeInsets.all(15),
+                padding: const EdgeInsets.only(bottom: 30, top: 30),
                 child: Image.asset(globals.logoImage),
               ),
-              Align(
-                alignment: Alignment.center,
-                child: Text(
-                  '${user?.email}',
-                  style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black),
-                  textAlign: TextAlign.center,
+              const Align(
+                alignment: Alignment.topLeft,
+                child: Row(
+                  children: <Widget>[
+                    Icon(Icons.person, color: Colors.black),
+                    TextButton(
+                        onPressed: null,
+                        child: Text(
+                          'Perfil',
+                          style: TextStyle(color: Colors.black),
+                        )),
+                  ],
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.only(top: 25, bottom: 25),
-                child: Divider(color: Colors.black, thickness: 2),
-              ),
+              const Divider(color: Colors.blueGrey, thickness: 0.5),
               Align(
                 alignment: Alignment.topLeft,
                 child: Row(
@@ -87,7 +101,7 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-              const Divider(color: Colors.blueGrey, thickness: 1),
+              const Divider(color: Colors.blueGrey, thickness: 0.5),
               Align(
                 alignment: Alignment.topLeft,
                 child: Row(
@@ -104,7 +118,7 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-              const Divider(color: Colors.blueGrey, thickness: 1),
+              const Divider(color: Colors.blueGrey, thickness: 0.5),
               Align(
                 alignment: Alignment.topLeft,
                 child: Row(
@@ -119,11 +133,14 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-              const Divider(color: Colors.blueGrey, thickness: 1),
+              const Divider(color: Colors.grey, thickness: 0.5),
               const Expanded(
                 child: Align(
                     alignment: Alignment.bottomCenter,
-                    child: Text('version 0.4')),
+                    child: Text(
+                      'Desenvolvido por Herik Colares\nversion 0.4',
+                      textAlign: TextAlign.center,
+                    )),
               ),
             ],
           ),
