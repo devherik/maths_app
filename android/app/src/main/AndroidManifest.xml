@@ -2,7 +2,7 @@
     <application
         android:label="maths_app"
         android:name="${applicationName}"
-        android:icon="@mipmap/maths_icon">
+        android:icon="@mipmap/maths_logo_rounded">
         <activity
             android:name=".MainActivity"
             android:exported="true"
