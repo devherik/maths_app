@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:maths_app/config/database/user_datastate.dart';
 import 'package:share_plus/share_plus.dart';
@@ -18,7 +19,9 @@ class ReportController {
               '${c.get('comprimento')} + ${c.get('largura')} + ${c.get('altura')} = ${c.get('resultado')} \n';
         }
         Share.share(txt);
-        print(txt);
+        if (kDebugMode) {
+          print(txt);
+        }
         return const Text('');
       },
     );
