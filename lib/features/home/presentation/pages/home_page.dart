@@ -139,7 +139,7 @@ class _HomePageState extends State<HomePage> {
               borderRadius: BorderRadius.circular(20), color: Colors.white60),
           padding: const EdgeInsets.only(left: 40, right: 40),
           margin:
-              const EdgeInsets.only(top: 200, bottom: 100, right: 10, left: 10),
+              const EdgeInsets.only(top: 200, bottom: 10, right: 10, left: 10),
           child: Align(
             alignment: Alignment.center,
             child: ListView(
