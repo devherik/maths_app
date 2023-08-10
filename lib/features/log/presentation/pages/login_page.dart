@@ -113,7 +113,6 @@ class _LoginPageState extends State<LoginPage> {
                       } else {
                         UserController().createUserWithEmailAndPassword(
                             _email, _password, _passwordValidate);
-                        context.pop();
                       }
                     },
                     child: Text(

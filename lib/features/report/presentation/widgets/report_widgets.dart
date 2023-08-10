@@ -111,7 +111,7 @@ class ReportWdgets {
             },
           );
         } else {
-          return const Text('Seus resultados apareçerão aqui.');
+          return const Center(child: Text('Seus resultados apareçerão aqui.'));
         }
       },
     );
