@@ -9,7 +9,7 @@ class HomeWidgets {
     return const Align(alignment: Alignment.center, child: Text('square'));
   }
 
-  Widget dialogPopUp(context, CubicMeter c) {
+  Widget dialogPopUp(homeContext, CubicMeter c) {
     return AlertDialog(
       backgroundColor:
           const Color.fromARGB(255, 206, 228, 180), //app base color
