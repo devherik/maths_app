@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:maths_app/core/util/widgets_util.dart';
 import 'package:maths_app/features/log/domain/usecases/user_controller.dart';
 import 'package:maths_app/config/globals.dart' as globals;
@@ -74,6 +75,9 @@ class _RecoveryPageState extends State<RecoveryPage> {
                     } else {
                       UserController()
                           .resetPassword(_emailController.text.trim());
+                      WidgetsUtil()
+                          .showMessage('Confira sua caixa de e-mail', context);
+                      context.pop();
                     }
                   },
                   child: const Text(

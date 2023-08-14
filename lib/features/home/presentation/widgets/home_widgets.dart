@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:maths_app/core/util/widgets_util.dart';
 import 'package:share_plus/share_plus.dart';
 
 import 'package:maths_app/config/database/entities/cubicmeter_entity.dart';
@@ -53,6 +54,7 @@ class HomeWidgets {
                 TextButton(
                   onPressed: () => {
                     DataState().createCubic(c.length, c.size, c.heigth),
+                    WidgetsUtil().showMessage('Pronto', homeContext),
                   },
                   style: const ButtonStyle(
                     backgroundColor:

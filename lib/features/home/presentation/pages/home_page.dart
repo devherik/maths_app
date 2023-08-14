@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
       drawer: Drawer(
         child: Container(
           padding: const EdgeInsets.symmetric(
-            horizontal: 35,
+            horizontal: 30,
           ),
           decoration: const BoxDecoration(
             color: Colors.white60,
@@ -54,11 +54,11 @@ class _HomePageState extends State<HomePage> {
                 children: <Widget>[
                   Text(
                     '${_user?.email}',
+                    overflow: TextOverflow.fade,
                     style: const TextStyle(
-                        fontSize: 20,
+                        fontSize: 15,
                         fontWeight: FontWeight.bold,
                         color: Colors.black),
-                    textAlign: TextAlign.center,
                   ),
                   IconButton(
                     icon: const Icon(

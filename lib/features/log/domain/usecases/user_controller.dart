@@ -27,14 +27,6 @@ class UserController {
           email: email,
           password: password,
         );
-        CollectionReference users =
-            FirebaseFirestore.instance.collection('users');
-        try {
-          users.add(UserState()
-              .getUid()); //adiciona a coleção users no firebase um usuario com o id da authentication
-        } on FirebaseException catch (e) {
-          error$.value = e.message;
-        }
       } on FirebaseException catch (e) {
         error$.value = e.message;
         if (kDebugMode) {
