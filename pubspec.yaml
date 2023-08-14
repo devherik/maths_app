@@ -81,6 +81,7 @@ flutter:
     - assets/images/usefull/simple_line.png
     - assets/images/svg/svg_drinkcoffee.svg
     - assets/images/svg/svg_forget_password.svg
+    - assets/images/svg/svg_report.svg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

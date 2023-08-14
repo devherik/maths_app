@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
-import 'package:maths_app/features/report/domain/usercases/report_controller.dart';
 import 'package:maths_app/features/report/presentation/widgets/report_widgets.dart';
 import 'package:maths_app/config/globals.dart' as globals;
 
@@ -28,22 +28,21 @@ class _ReportPageState extends State<ReportPage> {
               image: AssetImage(globals.backgroundImage), fit: BoxFit.cover),
         ),
         child: Column(
-          mainAxisSize: MainAxisSize.max,
+          mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            Expanded(
-              flex: 6,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 50, bottom: 50),
-                child: ReportWdgets().streamCubics(),
+            Padding(
+              padding: const EdgeInsets.only(top: 100),
+              child: SvgPicture.asset(
+                'assets/images/svg/svg_report.svg',
+                height: 200,
+                width: 200,
               ),
+            ),
+            Expanded(
+              child: ReportWdgets().streamCubics(),
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => {ReportController().listTxt()},
-        backgroundColor: const Color.fromARGB(255, 206, 228, 180),
-        child: const Icon(Icons.share),
       ),
     );
   }

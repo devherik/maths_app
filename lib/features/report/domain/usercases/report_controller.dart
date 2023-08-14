@@ -8,15 +8,15 @@ class ReportController {
   final cubicsCollection = DataState().readCubicsCollection();
   void listTxt() {
     String txt = '';
-    // cubicsCollection.listen(List<DocumentSnapshot> cubics) {
-
-    // };
     StreamBuilder(
       stream: cubicsCollection,
       builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
         for (DocumentSnapshot c in streamSnapshot.data!.docs) {
           txt +=
               '${c.get('comprimento')} + ${c.get('largura')} + ${c.get('altura')} = ${c.get('resultado')} \n';
+          if (kDebugMode) {
+            print(txt);
+          }
         }
         Share.share(txt);
         if (kDebugMode) {
