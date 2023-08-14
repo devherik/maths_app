@@ -54,44 +54,42 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       body: Container(
-          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+          height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
             image: DecorationImage(
                 image: AssetImage(globals.backgroundImage), fit: BoxFit.cover),
           ),
           child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Align(
-                  alignment: Alignment.center,
-                  child: Image.asset(globals.logoImage),
-                ),
-                Align(
-                  alignment: Alignment.bottomRight,
-                  child: TextButton.icon(
-                    onPressed: () {
-                      setState(() {
-                        isLogin = !isLogin;
-                      });
-                    },
-                    label: Text(
-                      isLogin ? 'Registrar' : 'Entrar',
-                      style: const TextStyle(color: Colors.blueGrey),
-                    ),
-                    icon: Icon(isLogin ? Icons.arrow_forward : Icons.arrow_back,
-                        color: Colors.blueGrey),
+            child: Align(
+              alignment: Alignment.center,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Align(
+                    alignment: Alignment.center,
+                    child: Image.asset(globals.logoImage),
                   ),
-                ),
-                Container(
-                  padding: const EdgeInsets.all(40),
-                  margin: const EdgeInsets.all(10),
-                  decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
-                      color: Colors.transparent),
-                  child: Column(
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: TextButton.icon(
+                      onPressed: () {
+                        setState(() {
+                          isLogin = !isLogin;
+                        });
+                      },
+                      label: Text(
+                        isLogin ? 'Registrar' : 'Entrar',
+                        style: const TextStyle(color: Colors.blueGrey),
+                      ),
+                      icon: Icon(
+                          isLogin ? Icons.arrow_forward : Icons.arrow_back,
+                          color: Colors.blueGrey),
+                    ),
+                  ),
+                  Column(
                     children: <Widget>[
                       formTextField('Email'),
                       formTextField('Senha'),
@@ -103,8 +101,8 @@ class _LoginPageState extends State<LoginPage> {
                         style: const ButtonStyle(
                           elevation: MaterialStatePropertyAll(5),
                           padding: MaterialStatePropertyAll<EdgeInsets>(
-                            EdgeInsets.symmetric(horizontal: 32, vertical: 8),
-                          ),
+                              EdgeInsets.only(
+                                  top: 20, bottom: 20, left: 80, right: 80)),
                           backgroundColor: MaterialStatePropertyAll<Color>(
                             Color.fromARGB(255, 206, 228, 180),
                           ),
@@ -140,8 +138,8 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ],
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           )),
     );
