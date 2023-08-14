@@ -84,6 +84,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     TextField(
                       controller: _passwordController,
+                      keyboardType: TextInputType.number,
                       textAlign: TextAlign.start,
                       obscureText: _showPassword,
                       maxLines: 1,
@@ -105,6 +106,7 @@ class _LoginPageState extends State<LoginPage> {
                             padding: const EdgeInsets.only(bottom: 50),
                             child: TextField(
                                 controller: _passwordConfirmationController,
+                                keyboardType: TextInputType.number,
                                 textAlign: TextAlign.start,
                                 obscureText: _showPassword,
                                 maxLines: 1,

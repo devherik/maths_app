@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:maths_app/core/util/widgets_util.dart';
 import 'package:maths_app/features/log/domain/usecases/user_controller.dart';
 import 'package:maths_app/config/globals.dart' as globals;
 
@@ -10,7 +12,7 @@ class RecoveryPage extends StatefulWidget {
 }
 
 class _RecoveryPageState extends State<RecoveryPage> {
-  final emailController = TextEditingController();
+  final _emailController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,25 +23,34 @@ class _RecoveryPageState extends State<RecoveryPage> {
           image: DecorationImage(
               image: AssetImage(globals.backgroundImage), fit: BoxFit.cover),
         ),
-        child: Container(
+        child: Padding(
           padding: const EdgeInsets.all(40),
-          margin: const EdgeInsets.all(10),
-          decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(20)),
-              color: Colors.transparent),
-          child: Column(
+          child: ListView(
             children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(40),
+                child: SvgPicture.asset(
+                  'assets/images/svg/svg_forget_password.svg',
+                  semanticsLabel: 'Forgot Password',
+                  height: 200,
+                  width: 200,
+                ),
+              ),
               const Align(
                 alignment: Alignment.center,
-                child: Text('Receba um e-mail para restaurar sua senha.'),
+                child: Text(
+                  'Receba um e-mail para restaurar sua senha.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.blueGrey, fontSize: 20),
+                ),
               ),
               Align(
                 alignment: Alignment.center,
                 child: TextFormField(
-                  controller: emailController,
+                  controller: _emailController,
+                  maxLines: 1,
                   decoration: const InputDecoration(
-                    label: Text('Email'),
-                  ),
+                      label: Text('Email'), hintText: 'usuario@mail.com'),
                 ),
               ),
               const SizedBox(
@@ -57,8 +68,14 @@ class _RecoveryPageState extends State<RecoveryPage> {
                       Color.fromARGB(255, 206, 228, 180),
                     ),
                   ),
-                  onPressed: () => UserController()
-                      .resetPassword(emailController.text.trim()),
+                  onPressed: () {
+                    if (_emailController.text.isEmpty) {
+                      WidgetsUtil().showMessage('Campo vazio', context);
+                    } else {
+                      UserController()
+                          .resetPassword(_emailController.text.trim());
+                    }
+                  },
                   child: const Text(
                     'ENVIAR',
                     style: TextStyle(
