@@ -2,6 +2,7 @@ import 'package:go_router/go_router.dart';
 import 'package:maths_app/features/home/presentation/pages/home_page.dart';
 import 'package:maths_app/features/log/presentation/pages/login_page.dart';
 import 'package:maths_app/features/log/presentation/pages/recovery_page.dart';
+import 'package:maths_app/features/personal/pages/personal_page.dart';
 import 'package:maths_app/features/report/presentation/pages/report_page.dart';
 import 'package:maths_app/features/welcome_page.dart';
 import 'package:maths_app/widget_tree.dart';
@@ -28,6 +29,10 @@ class AppRouter {
       GoRoute(
         path: '/report',
         builder: (context, state) => const ReportPage(),
+      ),
+      GoRoute(
+        path: '/personal',
+        builder: (context, state) => const PersonalPage(),
       ),
       GoRoute(
         path: '/widgetTree',

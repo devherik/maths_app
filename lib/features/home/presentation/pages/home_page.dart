@@ -81,12 +81,12 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              const Row(
+              Row(
                 children: <Widget>[
-                  Icon(Icons.person, color: Colors.black),
+                  const Icon(Icons.person, color: Colors.black),
                   TextButton(
-                      onPressed: null,
-                      child: Text(
+                      onPressed: () => context.push('/personal'),
+                      child: const Text(
                         'Perfil',
                         style: TextStyle(color: Colors.black),
                       )),
