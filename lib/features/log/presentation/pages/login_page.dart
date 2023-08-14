@@ -60,86 +60,88 @@ class _LoginPageState extends State<LoginPage> {
             image: DecorationImage(
                 image: AssetImage(globals.backgroundImage), fit: BoxFit.cover),
           ),
-          child: SingleChildScrollView(
-            child: Align(
-              alignment: Alignment.center,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Align(
-                    alignment: Alignment.center,
-                    child: Image.asset(globals.logoImage),
+          child: Container(
+            margin: const EdgeInsets.symmetric(vertical: 25),
+            alignment: Alignment.center,
+            child: ListView(
+              scrollDirection: Axis.vertical,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 35),
+                  child: Image.asset(
+                    semanticLabel: 'Maths Logo',
+                    globals.logoImage,
+                    fit: BoxFit.cover,
+                    height: 200,
+                    width: 200,
                   ),
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: TextButton.icon(
-                      onPressed: () {
-                        setState(() {
-                          isLogin = !isLogin;
-                        });
-                      },
-                      label: Text(
-                        isLogin ? 'Registrar' : 'Entrar',
-                        style: const TextStyle(color: Colors.blueGrey),
-                      ),
-                      icon: Icon(
-                          isLogin ? Icons.arrow_forward : Icons.arrow_back,
-                          color: Colors.blueGrey),
+                ),
+                Align(
+                  alignment: Alignment.bottomRight,
+                  child: TextButton.icon(
+                    onPressed: () {
+                      setState(() {
+                        isLogin = !isLogin;
+                      });
+                    },
+                    label: Text(
+                      isLogin ? 'Registrar' : 'Entrar',
+                      style: const TextStyle(color: Colors.blueGrey),
                     ),
+                    icon: Icon(isLogin ? Icons.arrow_forward : Icons.arrow_back,
+                        color: Colors.blueGrey),
                   ),
-                  Column(
-                    children: <Widget>[
-                      formTextField('Email'),
-                      formTextField('Senha'),
-                      !isLogin
-                          ? formTextField('Repita a senha')
-                          : const SizedBox(),
-                      const SizedBox(height: 50),
-                      OutlinedButton(
-                        style: const ButtonStyle(
-                          elevation: MaterialStatePropertyAll(5),
-                          padding: MaterialStatePropertyAll<EdgeInsets>(
-                              EdgeInsets.only(
-                                  top: 20, bottom: 20, left: 80, right: 80)),
-                          backgroundColor: MaterialStatePropertyAll<Color>(
-                            Color.fromARGB(255, 206, 228, 180),
-                          ),
-                        ),
-                        onPressed: () {
-                          if (isLogin) {
-                            UserController()
-                                .signInWithEmailAndPassword(_email, _password);
-                          } else {
-                            UserController().createUserWithEmailAndPassword(
-                                _email, _password, _passwordValidate);
-                          }
-                        },
-                        child: Text(
-                          isLogin ? 'ENTRAR' : 'CADASTRAR',
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
+                ),
+                Column(
+                  children: <Widget>[
+                    formTextField('Email'),
+                    formTextField('Senha'),
+                    !isLogin
+                        ? formTextField('Repita a senha')
+                        : const SizedBox(),
+                    const SizedBox(height: 50),
+                    OutlinedButton(
+                      style: const ButtonStyle(
+                        elevation: MaterialStatePropertyAll(5),
+                        padding: MaterialStatePropertyAll<EdgeInsets>(
+                            EdgeInsets.only(
+                                top: 20, bottom: 20, left: 80, right: 80)),
+                        backgroundColor: MaterialStatePropertyAll<Color>(
+                          Color.fromARGB(255, 206, 228, 180),
                         ),
                       ),
-                      Text(
-                        '${error.value}',
-                        style: const TextStyle(color: Colors.redAccent),
+                      onPressed: () {
+                        if (isLogin) {
+                          UserController()
+                              .signInWithEmailAndPassword(_email, _password);
+                        } else {
+                          UserController().createUserWithEmailAndPassword(
+                              _email, _password, _passwordValidate);
+                        }
+                      },
+                      child: Text(
+                        isLogin ? 'ENTRAR' : 'CADASTRAR',
+                        softWrap: false,
+                        style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
                       ),
-                      TextButton(
-                        onPressed: () => {context.push('/recovery')},
-                        child: const Text(
-                          'Recuperar cadastro',
-                          style:
-                              TextStyle(color: Colors.blueGrey, fontSize: 15),
-                        ),
+                    ),
+                    Text(
+                      '${error.value}',
+                      style: const TextStyle(color: Colors.redAccent),
+                    ),
+                    TextButton(
+                      onPressed: () => {context.push('/recovery')},
+                      child: const Text(
+                        'Recuperar cadastro',
+                        style: TextStyle(color: Colors.blueGrey, fontSize: 15),
                       ),
-                    ],
-                  ),
-                ],
-              ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           )),
     );
