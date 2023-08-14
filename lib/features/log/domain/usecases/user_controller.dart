@@ -56,56 +56,20 @@ class UserController {
       error$.value = e.message;
     }
   }
+
+  bool createIsEmpty(String e, String p, String pc) {
+    if (e.isEmpty && p.isEmpty && pc.isEmpty) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  bool signIsEmpty(String e, String p) {
+    if (e.isEmpty && p.isEmpty) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
-//   final ValueNotifier<UserEntity> userActual$ = ValueNotifier<UserEntity>(
-//       UserEntity(email: 'email', password: 'password', name: 'name'));
-
-//   UserEntity getUser() => userActual$.value;
-
-//   bool formInValidation(String? user, String? password) {
-//     if (user != null && password != null) {
-//       try {
-//         return true;
-//       } catch (error) {
-//         if (kDebugMode) {
-//           print(error);
-//         }
-//         return false;
-//       }
-//     }
-//     return false;
-//   }
-
-//   bool formUpValidation(
-//       String? user, String? email, String? password, String? confirmPassword) {
-//     if (user != null &&
-//         password != null &&
-//         confirmPassword != null &&
-//         email != null) {
-//       if (kDebugMode) print('$user, $email, $password, $confirmPassword');
-//       if (password == confirmPassword) {
-//         try {
-//           userActual$.value =
-//               UserEntity(email: email, password: password, name: user);
-
-//           Database().addUser(userActual$.value);
-//           return true;
-//         } catch (error) {
-//           if (kDebugMode) {
-//             print(error);
-//           }
-//           return false;
-//         }
-//       }
-//     }
-//     return false;
-//   }
-
-//   String listTxt() {
-//     String txt = '';
-//     for (var i in userActual$.value.cubics$.value) {
-//       txt += '${i.getString()} \n';
-//     }
-//     return txt;
-//   }
-// }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:maths_app/core/util/widgets_util.dart';
 import 'package:maths_app/features/log/domain/usecases/user_controller.dart';
 import 'package:maths_app/config/globals.dart' as globals;
 
@@ -11,12 +12,13 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final error = UserController().error$;
-  bool isLogin = true;
+  bool _showPassword = true;
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _passwordConfirmationController = TextEditingController();
 
-  String _email = '';
-  String _password = '';
-  String _passwordValidate = '';
+  var error = UserController().error$;
+  bool isLogin = true;
 
   @override
   void initState() {
@@ -24,29 +26,6 @@ class _LoginPageState extends State<LoginPage> {
     error.addListener(() {
       setState(() {});
     });
-  }
-
-  Widget formTextField(String? title) {
-    return TextFormField(
-        decoration: InputDecoration(
-          labelText: title,
-        ),
-        onChanged: (value) {
-          switch (title) {
-            case 'Email':
-              setState(() {
-                _email = value;
-              });
-            case 'Senha':
-              setState(() {
-                _password = value;
-              });
-            case 'Repita a senha':
-              setState(() {
-                _passwordValidate = value;
-              });
-          }
-        });
   }
 
   @override
@@ -94,12 +73,49 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 Column(
                   children: <Widget>[
-                    formTextField('Email'),
-                    formTextField('Senha'),
+                    TextField(
+                      controller: _emailController,
+                      textAlign: TextAlign.start,
+                      maxLines: 1,
+                      decoration: const InputDecoration(
+                        labelText: 'E-mail',
+                        hintText: 'usuario@mail.com',
+                      ),
+                    ),
+                    TextField(
+                      controller: _passwordController,
+                      textAlign: TextAlign.start,
+                      obscureText: _showPassword,
+                      maxLines: 1,
+                      decoration: InputDecoration(
+                        labelText: 'Senha',
+                        hintText: '********',
+                        suffixIcon: GestureDetector(
+                          onTap: () => setState(() {
+                            _showPassword = !_showPassword;
+                          }),
+                          child: !_showPassword
+                              ? const Icon(Icons.visibility, size: 24)
+                              : const Icon(Icons.visibility_off, size: 24),
+                        ),
+                      ),
+                    ),
                     !isLogin
-                        ? formTextField('Repita a senha')
-                        : const SizedBox(),
-                    const SizedBox(height: 50),
+                        ? Padding(
+                            padding: const EdgeInsets.only(bottom: 50),
+                            child: TextField(
+                                controller: _passwordConfirmationController,
+                                textAlign: TextAlign.start,
+                                obscureText: _showPassword,
+                                maxLines: 1,
+                                decoration: const InputDecoration(
+                                  labelText: 'Repita a senha',
+                                  hintText: '********',
+                                )),
+                          )
+                        : const SizedBox(
+                            height: 50,
+                          ),
                     OutlinedButton(
                       style: const ButtonStyle(
                         elevation: MaterialStatePropertyAll(5),
@@ -112,11 +128,29 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       onPressed: () {
                         if (isLogin) {
-                          UserController()
-                              .signInWithEmailAndPassword(_email, _password);
+                          if (UserController().signIsEmpty(
+                              _emailController.text.trim(),
+                              _passwordController.text.trim())) {
+                            WidgetsUtil()
+                                .showMessage('Campo(s) vazio(s)', context);
+                          } else {
+                            UserController().signInWithEmailAndPassword(
+                                _emailController.text.trim(),
+                                _passwordController.text.trim());
+                          }
                         } else {
-                          UserController().createUserWithEmailAndPassword(
-                              _email, _password, _passwordValidate);
+                          if (UserController().createIsEmpty(
+                              _emailController.text.trim(),
+                              _passwordController.text.trim(),
+                              _passwordConfirmationController.text.trim())) {
+                            WidgetsUtil()
+                                .showMessage('Campo(s) vazio(s)', context);
+                          } else {
+                            UserController().createUserWithEmailAndPassword(
+                                _emailController.text.trim(),
+                                _passwordController.text.trim(),
+                                _passwordConfirmationController.text.trim());
+                          }
                         }
                       },
                       child: Text(
@@ -127,10 +161,6 @@ class _LoginPageState extends State<LoginPage> {
                             fontSize: 20,
                             fontWeight: FontWeight.bold),
                       ),
-                    ),
-                    Text(
-                      '${error.value}',
-                      style: const TextStyle(color: Colors.redAccent),
                     ),
                     TextButton(
                       onPressed: () => {context.push('/recovery')},
