@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:maths_app/config/database/app_userstate.dart';
 
-import 'package:maths_app/config/globals.dart' as globals;
-
 class PersonalPage extends StatefulWidget {
   const PersonalPage({super.key});
 
@@ -33,20 +31,26 @@ class _PersonalPageState extends State<PersonalPage> {
       body: Container(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
         height: MediaQuery.of(context).size.height,
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(globals.backgroundImage), fit: BoxFit.cover)),
+        decoration: const BoxDecoration(color: Colors.white),
         child: Align(
           alignment: Alignment.center,
           child: ListView(
             children: [
               Align(
                 alignment: Alignment.center,
-                child: SvgPicture.asset(
-                  'assets/images/svg/svg_drinkcoffee.svg',
-                  semanticsLabel: 'Coffee Person',
-                  height: 120,
-                  width: 120,
+                child: Container(
+                  margin: const EdgeInsets.symmetric(vertical: 15),
+                  padding: const EdgeInsets.all(15),
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Color.fromARGB(255, 206, 228, 180),
+                  ),
+                  child: SvgPicture.asset(
+                    'assets/images/svg/svg_drinkcoffee.svg',
+                    semanticsLabel: 'Coffee Person',
+                    height: 120,
+                    width: 120,
+                  ),
                 ),
               ),
               TextFormField(
@@ -61,9 +65,12 @@ class _PersonalPageState extends State<PersonalPage> {
                 controller: _nameController,
                 enabled: isEditing,
                 maxLines: 1,
-                decoration: InputDecoration(
-                  labelText: _user?.displayName ?? 'Nome atual',
+                decoration: const InputDecoration(
+                  labelText: 'Nome atual',
                 ),
+              ),
+              const SizedBox(
+                height: 50,
               ),
               OutlinedButton(
                 style: const ButtonStyle(

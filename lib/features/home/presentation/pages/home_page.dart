@@ -132,7 +132,7 @@ class _HomePageState extends State<HomePage> {
               ),
               const Divider(color: Colors.grey, thickness: 0.5),
               const Text(
-                'Desenvolvido por Herik Colares\nversion 0.4',
+                'Desenvolvido por Herik Colares\nversion 1.0',
                 textAlign: TextAlign.center,
               ),
             ],
