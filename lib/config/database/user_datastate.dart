@@ -10,7 +10,7 @@ class DataState {
       'comprimento': l,
       'largura': s,
       'altura': h,
-      'resultado': l * s * h,
+      'resultado': (l * s * h).roundToDouble(),
     }).then((value) {
       if (kDebugMode) {
         print('Valor adicionado');

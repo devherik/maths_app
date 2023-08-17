@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:maths_app/core/util/widgets_util.dart';
 import 'package:share_plus/share_plus.dart';
 
 import 'package:maths_app/config/database/user_datastate.dart';
@@ -31,8 +32,7 @@ class ReportWdgets {
                       showDialog(
                         context: context,
                         builder: (context) => AlertDialog(
-                          backgroundColor:
-                              const Color.fromARGB(255, 206, 228, 180),
+                          backgroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(15)),
                           content: Column(
@@ -53,15 +53,19 @@ class ReportWdgets {
                               children: <Widget>[
                                 Align(
                                   child: TextButton(
-                                    onPressed: null,
+                                    onPressed: () => WidgetsUtil().showMessage(
+                                        'Segure para excluir', context),
                                     onLongPress: () => {
                                       DataState().deleteCubicDocument(doc.id),
+                                      WidgetsUtil().showMessage(
+                                          'Resultado excluído', context),
                                       context.pop(),
                                     },
                                     style: const ButtonStyle(
                                       backgroundColor:
                                           MaterialStatePropertyAll<Color>(
-                                              Colors.white),
+                                        Color.fromARGB(255, 206, 228, 180),
+                                      ),
                                       elevation: MaterialStatePropertyAll(5),
                                       alignment: Alignment.center,
                                     ),
@@ -83,7 +87,8 @@ class ReportWdgets {
                                     style: const ButtonStyle(
                                       backgroundColor:
                                           MaterialStatePropertyAll<Color>(
-                                              Colors.white),
+                                        Color.fromARGB(255, 206, 228, 180),
+                                      ),
                                       elevation: MaterialStatePropertyAll(5),
                                       alignment: Alignment.center,
                                     ),

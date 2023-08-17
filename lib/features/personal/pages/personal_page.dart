@@ -12,7 +12,6 @@ class PersonalPage extends StatefulWidget {
 
 class _PersonalPageState extends State<PersonalPage> {
   final _emailController = TextEditingController();
-  final _nameController = TextEditingController();
 
   final User? _user = UserState().currentUser;
   bool isEditing = false;
@@ -59,14 +58,6 @@ class _PersonalPageState extends State<PersonalPage> {
                 maxLines: 1,
                 decoration: InputDecoration(
                   labelText: _user?.email,
-                ),
-              ),
-              TextFormField(
-                controller: _nameController,
-                enabled: isEditing,
-                maxLines: 1,
-                decoration: const InputDecoration(
-                  labelText: 'Nome atual',
                 ),
               ),
               const SizedBox(

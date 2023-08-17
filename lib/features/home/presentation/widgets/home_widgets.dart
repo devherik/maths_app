@@ -12,8 +12,7 @@ class HomeWidgets {
 
   Widget dialogPopUp(homeContext, CubicMeter c) {
     return AlertDialog(
-      backgroundColor:
-          const Color.fromARGB(255, 206, 228, 180), //app base color
+      backgroundColor: Colors.white,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       content: Column(
         mainAxisSize: MainAxisSize.min,
@@ -41,8 +40,9 @@ class HomeWidgets {
                   onPressed: () =>
                       {Share.share(c.getString(), subject: 'Resultado.')},
                   style: const ButtonStyle(
-                    backgroundColor:
-                        MaterialStatePropertyAll<Color>(Colors.white),
+                    backgroundColor: MaterialStatePropertyAll<Color>(
+                      Color.fromARGB(255, 206, 228, 180),
+                    ),
                     elevation: MaterialStatePropertyAll(5),
                     alignment: Alignment.center,
                   ),
@@ -57,8 +57,9 @@ class HomeWidgets {
                     WidgetsUtil().showMessage('Pronto', homeContext),
                   },
                   style: const ButtonStyle(
-                    backgroundColor:
-                        MaterialStatePropertyAll<Color>(Colors.white),
+                    backgroundColor: MaterialStatePropertyAll<Color>(
+                      Color.fromARGB(255, 206, 228, 180),
+                    ),
                     elevation: MaterialStatePropertyAll(5),
                     alignment: Alignment.center,
                   ),
