@@ -158,7 +158,7 @@ class _HomePageState extends State<HomePage> {
                   textAlign: TextAlign.center,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
-                      labelText: 'Comprimento', hintText: '0.1'),
+                      labelText: 'Comprimento', hintText: '0.1 metros'),
                   inputFormatters: <TextInputFormatter>[
                     FilteringTextInputFormatter.allow(
                       RegExp(r'[0-9!.]'),
@@ -178,7 +178,7 @@ class _HomePageState extends State<HomePage> {
                   textAlign: TextAlign.center,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
-                      labelText: 'Largura', hintText: '0.1'),
+                      labelText: 'Largura', hintText: '0.1 metros'),
                   inputFormatters: <TextInputFormatter>[
                     FilteringTextInputFormatter.allow(
                       RegExp(r'[0-9!.]'),
@@ -198,7 +198,7 @@ class _HomePageState extends State<HomePage> {
                   textAlign: TextAlign.center,
                   keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
-                      labelText: 'Altura', hintText: '0.1'),
+                      labelText: 'Altura', hintText: '0.1 metros'),
                   inputFormatters: <TextInputFormatter>[
                     FilteringTextInputFormatter.allow(
                       RegExp(r'[0-9!.]'),

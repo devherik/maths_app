@@ -54,7 +54,9 @@ class HomeWidgets {
                 TextButton(
                   onPressed: () => {
                     DataState().createCubic(c.length, c.size, c.heigth),
-                    WidgetsUtil().showMessage('Pronto', homeContext),
+                    WidgetsUtil().showMessage(
+                        'Pronto (o valor pode ter sido arredondado)',
+                        homeContext),
                   },
                   style: const ButtonStyle(
                     backgroundColor: MaterialStatePropertyAll<Color>(

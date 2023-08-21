@@ -7,7 +7,7 @@ class CubicMeter {
   CubicMeter(this.heigth, this.length, this.size);
 
   double get() {
-    cubic = (length * size * heigth).roundToDouble();
+    cubic = length * size * heigth;
     return cubic;
   }
 
