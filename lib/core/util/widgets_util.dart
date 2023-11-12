@@ -5,6 +5,7 @@ class WidgetsUtil {
     final snack = SnackBar(
       content: Text(
         label,
+        style: const TextStyle(fontWeight: FontWeight.w800),
         textAlign: TextAlign.center,
       ),
       backgroundColor: Colors.redAccent,

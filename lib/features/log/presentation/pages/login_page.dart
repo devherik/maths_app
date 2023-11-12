@@ -33,17 +33,15 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       body: Container(
-          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+          padding: const EdgeInsets.symmetric(vertical: 100, horizontal: 40),
           height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
             image: DecorationImage(
                 image: AssetImage(globals.backgroundImage), fit: BoxFit.cover),
           ),
-          child: Container(
-            margin: const EdgeInsets.symmetric(vertical: 25),
-            alignment: Alignment.center,
-            child: ListView(
-              scrollDirection: Axis.vertical,
+          child: SingleChildScrollView(
+            reverse: true,
+            child: Column(
               children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 35),
@@ -51,8 +49,6 @@ class _LoginPageState extends State<LoginPage> {
                     semanticLabel: 'Maths Logo',
                     globals.logoImage,
                     fit: BoxFit.cover,
-                    height: 200,
-                    width: 200,
                   ),
                 ),
                 Align(
@@ -118,53 +114,57 @@ class _LoginPageState extends State<LoginPage> {
                         : const SizedBox(
                             height: 50,
                           ),
-                    OutlinedButton(
-                      style: const ButtonStyle(
-                        elevation: MaterialStatePropertyAll(5),
-                        padding: MaterialStatePropertyAll<EdgeInsets>(
-                            EdgeInsets.only(
-                                top: 20, bottom: 20, left: 80, right: 80)),
-                        backgroundColor: MaterialStatePropertyAll<Color>(
-                          Color.fromARGB(255, 206, 228, 180),
-                        ),
-                      ),
-                      onPressed: () {
-                        if (isLogin) {
-                          if (UserController().signIsEmpty(
-                              _emailController.text.trim(),
-                              _passwordController.text.trim())) {
-                            WidgetsUtil()
-                                .showMessage('Campo(s) vazio(s)', context);
-                          } else {
-                            UserController().signInWithEmailAndPassword(
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: MaterialButton(
+                        onPressed: () {
+                          if (isLogin) {
+                            if (UserController().signIsEmpty(
                                 _emailController.text.trim(),
-                                _passwordController.text.trim());
-                          }
-                        } else {
-                          if (UserController().createIsEmpty(
-                              _emailController.text.trim(),
-                              _passwordController.text.trim(),
-                              _passwordConfirmationController.text.trim())) {
-                            WidgetsUtil()
-                                .showMessage('Campo(s) vazio(s)', context);
+                                _passwordController.text.trim())) {
+                              WidgetsUtil()
+                                  .showMessage('Campo(s) vazio(s)', context);
+                            } else {
+                              UserController().signInWithEmailAndPassword(
+                                  _emailController.text.trim(),
+                                  _passwordController.text.trim());
+                            }
                           } else {
-                            UserController().createUserWithEmailAndPassword(
+                            if (UserController().createIsEmpty(
                                 _emailController.text.trim(),
                                 _passwordController.text.trim(),
-                                _passwordConfirmationController.text.trim());
+                                _passwordConfirmationController.text.trim())) {
+                              WidgetsUtil()
+                                  .showMessage('Campo(s) vazio(s)', context);
+                            } else {
+                              UserController().createUserWithEmailAndPassword(
+                                  _emailController.text.trim(),
+                                  _passwordController.text.trim(),
+                                  _passwordConfirmationController.text.trim());
+                            }
                           }
-                        }
-                      },
-                      child: Text(
-                        isLogin ? 'ENTRAR' : 'CADASTRAR',
-                        softWrap: false,
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
+                        },
+                        color: const Color.fromARGB(255, 206, 228, 180),
+                        elevation: 4,
+                        splashColor: Colors.white24,
+                        onLongPress: null,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 18),
+                        minWidth: MediaQuery.of(context).size.width,
+                        child: Text(
+                          isLogin ? 'ENTRAR' : 'CADASTRAR',
+                          softWrap: false,
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 3),
+                        ),
                       ),
                     ),
-                    TextButton(
+                    MaterialButton(
                       onPressed: () => {context.push('/recovery')},
                       child: const Text(
                         'Recuperar cadastro',
