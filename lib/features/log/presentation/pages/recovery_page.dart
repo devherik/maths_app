@@ -20,13 +20,15 @@ class _RecoveryPageState extends State<RecoveryPage> {
       appBar: AppBar(),
       extendBodyBehindAppBar: true,
       body: Container(
+        padding: const EdgeInsets.symmetric(vertical: 100, horizontal: 40),
+        height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
           image: DecorationImage(
               image: AssetImage(globals.backgroundImage), fit: BoxFit.cover),
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(40),
-          child: ListView(
+        child: SingleChildScrollView(
+          reverse: true,
+          child: Column(
             children: <Widget>[
               Padding(
                 padding: const EdgeInsets.all(40),
@@ -40,7 +42,7 @@ class _RecoveryPageState extends State<RecoveryPage> {
               const Align(
                 alignment: Alignment.center,
                 child: Text(
-                  'Receba um e-mail para restaurar sua senha.',
+                  'Insira seu e-mail para restaurar sua senha.',
                   textAlign: TextAlign.center,
                   style: TextStyle(color: Colors.blueGrey, fontSize: 20),
                 ),
@@ -51,7 +53,7 @@ class _RecoveryPageState extends State<RecoveryPage> {
                   controller: _emailController,
                   maxLines: 1,
                   decoration: const InputDecoration(
-                      label: Text('Email'), hintText: 'usuario@mail.com'),
+                      label: Text('E-mail'), hintText: 'usuario@mail.com'),
                 ),
               ),
               const SizedBox(
@@ -59,16 +61,7 @@ class _RecoveryPageState extends State<RecoveryPage> {
               ),
               Align(
                 alignment: Alignment.center,
-                child: OutlinedButton(
-                  style: const ButtonStyle(
-                    elevation: MaterialStatePropertyAll(5),
-                    padding: MaterialStatePropertyAll<EdgeInsets>(
-                      EdgeInsets.only(top: 20, bottom: 20, left: 80, right: 80),
-                    ),
-                    backgroundColor: MaterialStatePropertyAll<Color>(
-                      Color.fromARGB(255, 206, 228, 180),
-                    ),
-                  ),
+                child: MaterialButton(
                   onPressed: () {
                     if (_emailController.text.isEmpty) {
                       WidgetsUtil().showMessage('Campo vazio', context);
@@ -80,12 +73,24 @@ class _RecoveryPageState extends State<RecoveryPage> {
                       context.pop();
                     }
                   },
+                  color: const Color.fromARGB(255, 206, 228, 180),
+                  elevation: 4,
+                  splashColor: Colors.white24,
+                  onLongPress: null,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
+                  minWidth: MediaQuery.of(context).size.width,
                   child: const Text(
                     'ENVIAR',
+                    softWrap: false,
                     style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
+                      color: Colors.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      letterSpacing: 3,
+                    ),
                   ),
                 ),
               )
